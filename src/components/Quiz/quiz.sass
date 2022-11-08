@@ -1,0 +1,47 @@
+.quiz
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 100%
+    background-color: #EFE7DA
+    padding: 3rem
+
+    &__flag
+        margin-bottom: 2rem
+
+    &__answer
+        display: flex
+        justify-content: center
+        max-width: 100%
+        flex-wrap: wrap
+
+        &__letter
+            font-size: 4rem
+            text-align: center
+            text-transform: uppercase
+            margin-right: 2rem
+            color: #16584b
+            width: 4rem
+            background-color: #EFE7DA
+            border: none
+            border-bottom: 5px solid #23967F
+            
+            &:hover
+                cursor: pointer
+
+            &:focus
+                color: #A63D40
+                caret-color: transparent
+                border-bottom: 5px solid #A63D40
+
+            &::selection
+                color: #A63D40
+                background-color: transparent
+                border-bottom: 5px solid #A63D40
+
+        &__space
+            margin-right: 2rem
+            width: 2rem
+            background-color: #EFE7DA
+            border: none
+            font-size: 4rem
