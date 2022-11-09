@@ -12,7 +12,7 @@
     &__answer
         display: flex
         justify-content: center
-        max-width: 100%
+        width: 100%
         flex-wrap: wrap
 
         &__letter
@@ -21,27 +21,82 @@
             text-transform: uppercase
             margin-right: 2rem
             color: #16584b
-            width: 4rem
-            background-color: #EFE7DA
-            border: none
-            border-bottom: 5px solid #23967F
+            background-color: #d5e7e4
+            border: 5px solid #16584b
+            width: 100%
+            margin-bottom: 3rem
             
             &:hover
                 cursor: pointer
 
-            &:focus
-                color: #A63D40
-                caret-color: transparent
-                border-bottom: 5px solid #A63D40
+    &__buttons
+        display: flex
+        justify-content: center
 
-            &::selection
-                color: #A63D40
-                background-color: transparent
-                border-bottom: 5px solid #A63D40
+        &__pass
+            margin-right: 4rem
 
-        &__space
-            margin-right: 2rem
-            width: 2rem
-            background-color: #EFE7DA
+        &__submit, &__pass
+            background-color: #23967F
+            color: white
+            font-size: 2rem
+            padding: 1rem 2rem
             border: none
-            font-size: 4rem
+            border-bottom: 5px solid 
+            margin-bottom: 2rem
+
+            &:hover
+                cursor: pointer
+                background-color: #5bccb5
+
+    &__result
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100vw
+        height: 100vh
+        position: fixed
+
+        &__content
+            display: flex
+            flex-direction: column
+            align-items: center
+            background-color: #23967F
+            padding: 2rem
+            border: 5px solid #16584b
+
+            &__correct
+                color: white
+                background-color: green
+                padding: 1rem
+                font-size: 4rem
+                border: 5px solid white
+                margin-bottom: 2rem
+
+            &__incorrect
+                color: white
+                background-color: #d61818
+                padding: 1rem
+                font-size: 4rem
+                border: 5px solid white
+                margin-bottom: 2rem
+
+            &__solution
+                color: white
+                font-size: 5rem
+                font-weight: bold
+                text-align: center
+                margin-bottom: 2rem
+                text-transform: uppercase
+
+
+            &__next, &__pass
+                background-color: #16584b
+                color: white
+                font-size: 2rem
+                padding: 1rem 2rem
+                border: 5px solid white
+
+                &:hover
+                    cursor: pointer
+                    background-color: #5bccb5

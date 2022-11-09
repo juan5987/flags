@@ -5,78 +5,50 @@ import Header from '../Header/Header';
 import './quiz.sass';
 
 const Quiz = () => {
-  const [randomInt, setRandomInt] = useState(getRandomNumber(1, 250));
+  const [allCountries, setAllCountries]: any = useState();
+  const [randomInt, setRandomInt] = useState(getRandomNumber(1, 202));
   const [currentFlag, setCurrentFlag] = useState<string>('');
-  const [answer, setAnswer] = useState<[]>([]);
-  const [solution, setSolution] = useState<[]>([]);
-  const [currentLetterIndex, setCurrentLetterIndex] = useState<number>(0);
+  const [answer, setAnswer] = useState<string>('');
+  const [solution, setSolution] = useState<string>();
   const inputRef: any = useRef([]);
+  const [showResult, setShowResult] = useState(false);
+  const [result, setResult] = useState(false);
 
   useEffect(() => {
     axios('https://restcountries.com/v2/all').then((result) => {
       let actualCountries = result.data.filter(
         (country: any) => country.independent === true
       );
+      setAllCountries(actualCountries);
       setCurrentFlag(actualCountries[randomInt].flag);
-      setSolution(actualCountries[randomInt].translations.fr.split(''));
-      inputRef.current[0].focus();
-      console.log(actualCountries[randomInt].translations.fr);
+      setSolution(actualCountries[randomInt].translations.fr);
+      inputRef.current.focus();
     });
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.dataset.index) {
-      const newAnswer: any = [...answer];
-      newAnswer[parseInt(e.target.dataset.index)] = [e.target.value];
-      setAnswer(newAnswer);
-      console.log(answer);
+  const handlePass = () => {
+    setResult(false);
+    setShowResult(true);
+  };
 
-      if (parseInt(e.target.dataset.index) < solution.length - 1) {
-        if (inputRef.current[parseInt(e.target.dataset.index) + 1]) {
-          if (
-            inputRef.current[parseInt(e.target.dataset.index)].value === '' &&
-            inputRef.current[parseInt(e.target.dataset.index) - 1]
-          ) {
-            inputRef.current[parseInt(e.target.dataset.index) - 1].focus();
-            inputRef.current[parseInt(e.target.dataset.index) - 1].select();
-          } else if (
-            inputRef.current[parseInt(e.target.dataset.index)].value === '' &&
-            inputRef.current[parseInt(e.target.dataset.index) - 2]
-          ) {
-            inputRef.current[parseInt(e.target.dataset.index) - 2].focus();
-            inputRef.current[parseInt(e.target.dataset.index) - 2].select();
-          } else if (
-            parseInt(e.target.dataset.index) === 0 &&
-            inputRef.current[parseInt(e.target.dataset.index)].value === ''
-          ) {
-            inputRef.current[parseInt(e.target.dataset.index)].focus();
-            inputRef.current[parseInt(e.target.dataset.index)].select();
-          } else {
-            inputRef.current[parseInt(e.target.dataset.index) + 1].focus();
-            inputRef.current[parseInt(e.target.dataset.index) + 1].select();
-          }
-        } else {
-          if (
-            inputRef.current[parseInt(e.target.dataset.index)].value === '' &&
-            inputRef.current[parseInt(e.target.dataset.index) - 1]
-          ) {
-            inputRef.current[parseInt(e.target.dataset.index) - 1].focus();
-            inputRef.current[parseInt(e.target.dataset.index) - 1].select();
-          } else {
-            inputRef.current[parseInt(e.target.dataset.index) + 2].focus();
-            inputRef.current[parseInt(e.target.dataset.index) + 2].select();
-          }
-        }
+  const handleSubmit = () => {
+    if (answer) {
+      if (answer?.toLowerCase() === solution?.toLowerCase()) {
+        setResult(true);
       } else {
-        if (
-          parseInt(e.target.dataset.index) === solution.length - 1 &&
-          inputRef.current[parseInt(e.target.dataset.index)].value === ''
-        ) {
-          inputRef.current[parseInt(e.target.dataset.index) - 1].focus();
-          inputRef.current[parseInt(e.target.dataset.index) - 1].select();
-        }
+        setResult(false);
       }
+      setShowResult(true);
     }
+  };
+
+  const handleNextFlag = () => {
+    setShowResult(false);
+    const randomNumber = getRandomNumber(1, 202);
+    setCurrentFlag(allCountries[randomNumber].flag);
+    setSolution(allCountries[randomNumber].translations.fr);
+    inputRef.current.focus();
+    setAnswer('');
   };
 
   return (
@@ -85,37 +57,52 @@ const Quiz = () => {
         className='quiz__flag'
         src={currentFlag}
         alt='drapeau'
-        width={800}
+        width={600}
         height={'auto'}
       />
       <div className='quiz__answer'>
-        {solution &&
-          solution.map((letter, index) =>
-            letter !== ' ' && letter !== '-' ? (
-              <input
-                key={index}
-                onChange={handleInputChange}
-                className='quiz__answer__letter'
-                type='text'
-                ref={(element) => (inputRef.current[index] = element)}
-                maxLength={1}
-                data-index={index}
-                onClick={(e: any) => e.target.select()}
-              />
-            ) : (
-              <div
-                key={index}
-                className={
-                  letter === ' '
-                    ? 'quiz__answer__space'
-                    : 'quiz__answer__letter'
-                }
-              >
-                {letter === '-' ? letter : ''}
-              </div>
-            )
-          )}
+        {
+          <input
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAnswer(e.target.value)
+            }
+            className='quiz__answer__letter'
+            type='text'
+            ref={inputRef}
+            placeholder='Réponse'
+            value={answer}
+          />
+        }
+        <div className='quiz__buttons'>
+          <button className='quiz__buttons__pass' onClick={handlePass}>
+            Passer
+          </button>
+          <button className='quiz__buttons__submit' onClick={handleSubmit}>
+            Valider
+          </button>
+        </div>
       </div>
+      {showResult && (
+        <div className='quiz__result'>
+          <div className='quiz__result__content'>
+            {result && (
+              <h3 className='quiz__result__content__correct'>Bonne réponse</h3>
+            )}{' '}
+            {!result && (
+              <h3 className='quiz__result__content__incorrect'>
+                Mauvaise réponse
+              </h3>
+            )}
+            <span className='quiz__result__content__solution'>{solution}</span>
+            <button
+              className='quiz__result__content__next'
+              onClick={handleNextFlag}
+            >
+              Drapeau suivant
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
