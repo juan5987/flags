@@ -4,10 +4,34 @@
     align-items: center
     width: 100%
     background-color: #EFE7DA
-    padding: 3rem
 
-    &__flag
-        margin-bottom: 2rem
+    &__top
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 100%
+
+        &__left, &__right
+            flex: 1
+            text-align: center
+
+        &__flag
+            margin-bottom: 2rem
+            flex: 1
+
+        &_title
+            color: #16584b
+            font-size: 3rem
+            font-weight: bold
+            text-transform: uppercase
+
+        &__score
+            color: #16584b
+            font-size: 10rem
+            font-weight: bold
+
+        &__loading
+            color: #16584b
 
     &__answer
         display: flex
@@ -16,14 +40,14 @@
         flex-wrap: wrap
 
         &__letter
-            font-size: 4rem
+            font-size: 3rem
             text-align: center
             text-transform: uppercase
-            margin-right: 2rem
             color: #16584b
             background-color: #d5e7e4
             border: 5px solid #16584b
             width: 100%
+            margin: 0 2rem
             margin-bottom: 3rem
             
             &:hover
@@ -61,28 +85,50 @@
             display: flex
             flex-direction: column
             align-items: center
-            background-color: #23967F
+            background-color: white
             padding: 2rem
-            border: 5px solid #16584b
+            box-shadow: 5px 5px 5px -3px #999999
+
+            &__check
+                height: 100px
+                border: 5px solid green
+                border-radius: 50%
+                padding: 1rem
+                box-shadow: 0px 0px 15px 5px green
+                z-index: 2
+
+            &__cross
+                color: #d61818
+                font-weight: bold
+                font-size: 5rem
+                border: 5px solid #d61818
+                border-radius: 50%
+                height: 100px
+                width: 100px
+                display: flex
+                justify-content: center
+                align-items: center
+                padding-bottom: .6rem
+                box-shadow: 0px 0px 15px 5px #d61818
+                z-index: 2
 
             &__correct
-                color: white
-                background-color: green
+                color: green
                 padding: 1rem
                 font-size: 4rem
                 border: 5px solid white
-                margin-bottom: 2rem
 
             &__incorrect
-                color: white
-                background-color: #d61818
-                padding: 1rem
+                color: #d61818
+                background-color: transparent
                 font-size: 4rem
                 border: 5px solid white
-                margin-bottom: 2rem
+
+            &__text
+                font-size: 2rem  
 
             &__solution
-                color: white
+                color: black
                 font-size: 5rem
                 font-weight: bold
                 text-align: center
@@ -96,7 +142,54 @@
                 font-size: 2rem
                 padding: 1rem 2rem
                 border: 5px solid white
+                display: flex
+                align-items: center
 
                 &:hover
                     cursor: pointer
                     background-color: #5bccb5
+
+
+    &__gameover
+        position: absolute
+        width: 100vw
+        height: 100vh
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+        &__content
+            display: flex
+            flex-direction: column
+            align-items: center
+            background-color: white
+            padding: 2rem
+            box-shadow: 5px 5px 5px -3px #999999
+
+            &__title
+                color: #16584b
+                font-size: 4rem
+                text-transform: uppercase
+                margin-bottom: 2rem
+
+            &__score
+                font-size: 3rem
+                font-weight: bold
+                margin-bottom: 2rem
+
+            &__buttons
+                display: flex
+
+                &__play, &__quit
+                    background-color: #16584b
+                    color: white
+                    font-size: 2rem
+                    padding: 1rem 2rem
+                    border: 5px solid white
+                    display: flex
+                    align-items: center
+
+                    &:hover
+                        cursor: pointer
+                        background-color: #5bccb5

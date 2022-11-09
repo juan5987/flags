@@ -5,15 +5,23 @@ import './header.sass';
 const Header = () => {
   return (
     <header className='header'>
-      <h1 className='header__title'>Flags</h1>
       <nav className='header__nav'>
         <ul className='header__nav__list'>
           <li className='header__nav__list__element'>
             <Link className='header__nav__list__element__link' to='/'>
-              Home
+              Accueil
             </Link>
-            <Link className='header__nav__list__element__link' to='/about'>
-              About
+            <Link
+              className='header__nav__list__element__link'
+              to='/best-scores'
+            >
+              Meilleurs scores
+            </Link>
+            <Link className='header__nav__list__element__link' to='/rules'>
+              Règles
+            </Link>
+            <Link className='header__nav__list__element__link' to='/login'>
+              Connexion
             </Link>
           </li>
         </ul>

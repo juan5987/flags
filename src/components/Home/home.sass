@@ -1,14 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap')
+
 .home
     display: flex
     flex-direction: column
     flex-grow: 2
 
+    &__title
+        text-align: center
+        font-size: 8rem
+        color: #FF6700
+        font-family: 'Pacifico', 'Roboto', sans-serif
+        margin-bottom: 2rem
+
     &__wrapper
         display: flex
         flex-direction: column
-        flex-grow: 1
         align-items: center
-        justify-content: center
+        width: 70%
+        margin: 0 auto
+
+        &__description
+            text-align: center
+
+            &__paragraph
+                font-size: 2rem
+                margin-bottom: 2rem
 
         &__start
             background-color: #23967F
@@ -16,6 +32,8 @@
             font-size: 2rem
             padding: 1rem 2rem
             border-bottom: 5px solid #16584b
+            text-transform: uppercase
+            margin-bottom: 2rem
 
             &:hover
                 background-color: #5bccb5

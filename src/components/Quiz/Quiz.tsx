@@ -1,33 +1,65 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { getRandomNumber } from '../../utils/randomInt';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import check from '../../static/images/check.svg';
+import chevron_right from '../../static/images/chevron-right.svg';
 import './quiz.sass';
 
 const Quiz = () => {
   const [allCountries, setAllCountries]: any = useState();
-  const [randomInt, setRandomInt] = useState(getRandomNumber(1, 202));
   const [currentFlag, setCurrentFlag] = useState<string>('');
   const [answer, setAnswer] = useState<string>('');
   const [solution, setSolution] = useState<string>();
   const inputRef: any = useRef([]);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(false);
+  const [score, setScore] = useState(0);
+  const [timer, setTimer] = useState(90);
+  const [intervalId, setIntervalId] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios('https://restcountries.com/v2/all').then((result) => {
-      let actualCountries = result.data.filter(
-        (country: any) => country.independent === true
-      );
-      setAllCountries(actualCountries);
-      setCurrentFlag(actualCountries[randomInt].flag);
-      setSolution(actualCountries[randomInt].translations.fr);
-      inputRef.current.focus();
-    });
+    if (!isLoading) {
+      const newIntervalId: any = setInterval(() => {
+        setTimer((timer) => timer - 1);
+      }, 1000);
+      setIntervalId(newIntervalId);
+      return () => clearInterval(newIntervalId);
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (timer === 0) {
+      clearInterval(intervalId);
+      setGameOver(true);
+    }
+  }, [timer]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    axios('https://restcountries.com/v2/all')
+      .then((result) => {
+        let actualCountries = result.data.filter(
+          (country: any) => country.independent === true
+        );
+        setAllCountries(actualCountries);
+        const randomInt = getRandomNumber(1, 202);
+        setCurrentFlag(actualCountries[randomInt].flag);
+        setSolution(actualCountries[randomInt].translations.fr);
+        inputRef.current.focus();
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   const handlePass = () => {
     setResult(false);
+    setScore((score) => score - 1);
     setShowResult(true);
   };
 
@@ -35,7 +67,9 @@ const Quiz = () => {
     if (answer) {
       if (answer?.toLowerCase() === solution?.toLowerCase()) {
         setResult(true);
+        setScore((score) => score + 3);
       } else {
+        setScore((score) => score - 1);
         setResult(false);
       }
       setShowResult(true);
@@ -51,15 +85,43 @@ const Quiz = () => {
     setAnswer('');
   };
 
+  const handlePlayAgain = () => {
+    setTimer(90);
+    setGameOver(false);
+    setScore(0);
+    handleNextFlag();
+    const newIntervalId: any = setInterval(() => {
+      setTimer((timer) => timer - 1);
+    }, 1000);
+    setIntervalId(newIntervalId);
+  };
+
   return (
     <div className='quiz'>
-      <img
-        className='quiz__flag'
-        src={currentFlag}
-        alt='drapeau'
-        width={600}
-        height={'auto'}
-      />
+      <Header />
+      <div className='quiz__top'>
+        <div className='quiz__top__left'>
+          <h2 className='quiz__top_title'>Score</h2>
+          <span className='quiz__top__score'>{score}</span>
+        </div>
+        <div>
+          {!isLoading ? (
+            <img
+              className='quiz__top__flag'
+              src={currentFlag}
+              alt='drapeau'
+              height={400}
+            />
+          ) : (
+            <h2 className='quiz__top__loading'>Sélection du drapeau...</h2>
+          )}
+        </div>
+        <div className='quiz__top__right'>
+          <h2 className='quiz__top_title'>Temps restant</h2>
+          <span className='quiz__top__score'>{timer}</span>
+        </div>
+      </div>
+
       <div className='quiz__answer'>
         {
           <input
@@ -86,12 +148,28 @@ const Quiz = () => {
         <div className='quiz__result'>
           <div className='quiz__result__content'>
             {result && (
-              <h3 className='quiz__result__content__correct'>Bonne réponse</h3>
-            )}{' '}
+              <>
+                <img
+                  className='quiz__result__content__check'
+                  src={check}
+                  alt='check logo'
+                />
+                <h3 className='quiz__result__content__correct'>
+                  Félicitations !
+                </h3>
+                <span className='quiz__result__content__text'>
+                  La réponse est:
+                </span>
+              </>
+            )}
             {!result && (
-              <h3 className='quiz__result__content__incorrect'>
-                Mauvaise réponse
-              </h3>
+              <>
+                <div className='quiz__result__content__cross'>x</div>
+                <h3 className='quiz__result__content__incorrect'>Dommage</h3>
+                <span className='quiz__result__content__text'>
+                  La réponse était:
+                </span>
+              </>
             )}
             <span className='quiz__result__content__solution'>{solution}</span>
             <button
@@ -99,7 +177,30 @@ const Quiz = () => {
               onClick={handleNextFlag}
             >
               Drapeau suivant
+              <img src={chevron_right} alt='chevron' />
             </button>
+          </div>
+        </div>
+      )}
+      <Footer />
+      {gameOver && (
+        <div className='quiz__gameover'>
+          <div className='quiz__gameover__content'>
+            <h2 className='quiz__gameover__content__title'>partie terminée</h2>
+            <span className='quiz__gameover__content__score'>
+              Votre score est: {score}
+            </span>
+            <div className='quiz__gameover__content__buttons'>
+              <button
+                className='quiz__gameover__content__buttons__play'
+                onClick={handlePlayAgain}
+              >
+                Rejouer
+              </button>
+              <Link className='quiz__gameover__content__buttons__quit' to='/'>
+                Quitter
+              </Link>
+            </div>
           </div>
         </div>
       )}
