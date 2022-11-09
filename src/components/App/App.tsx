@@ -8,7 +8,7 @@ import './app.sass';
 const App = () => {
   return (
     <div className='app'>
-      <Router>
+      <Router basename='/flags'>
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/quiz' element={<Quiz />}></Route>
