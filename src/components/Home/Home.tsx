@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className='home'>
       <Header />
-      <h1 className='home__title'>Wolrd Flags</h1>
+      <h1 className='home__title'>World Flags</h1>
       <div className='home__wrapper'>
         <div className='home__wrapper__description'>
           <p className='home__wrapper__description__paragraph'>
