@@ -39,11 +39,98 @@
 
                     &:last-child
                         margin-right: 0
-
+    
     &__menu-mobile
-        position: fixed
-        color: white
-        top: 1rem
-        left: 2rem
-        font-size: 2rem
-        
+        display: none
+
+
+@media all and (max-width: 400px)
+    .header
+
+        &__menu-mobile
+            display: block
+            font-size: 2rem
+            color: white
+            position: fixed
+            top: 1rem
+            left: 2rem
+
+        &__nav
+            display: none
+
+        &__nav-mobile
+            position: fixed
+            top: 0
+            width: 100%
+            background-color: #16584b
+
+            &__list
+                width: 100%
+                display: flex
+                flex-direction: column
+                align-items: center
+
+                &__element
+                    display: flex
+                    justify-content: center
+                    width: 100%
+                
+                    &__link
+                        width: 100%
+                        color: white
+                        font-size: 2rem
+                        border-bottom: 1px solid white
+                        text-align: center
+                        padding: 1rem 0
+
+                        &:hover
+                            background-color: #23967F
+
+                &__element-burger
+                    display: flex
+                    justify-content: flex-end
+                    padding: 1rem
+                    width: 100%
+                    border-bottom: 1px solid white
+
+                    &__burger
+                        display: flex
+                        flex-direction: column
+                        width: 40px
+                        height: 40px
+
+                        &__line
+                            content: " "
+                            width: 100%
+                            height: 5px
+                            background-color: white
+                            margin-bottom: 10px
+
+                            &:last-child
+                                margin-bottom: 0
+
+                    &__cross
+                        display: flex
+                        flex-direction: column
+                        width: 40px
+                        height: 40px
+
+                        &__line1
+                            content: " "
+                            width: 40px
+                            height: 5px
+                            background-color: white
+                            margin-bottom: 10px
+                            position: relative
+                            top: 20px
+                            transform: rotate(45deg)
+
+                        &__line2
+                            content: " "
+                            width: 40px
+                            height: 5px
+                            background-color: white
+                            margin-bottom: 10px
+                            transform: rotate(-45deg)
+                            position: relative
+                            top: 5px
