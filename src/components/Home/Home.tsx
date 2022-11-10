@@ -26,7 +26,7 @@ const Home = () => {
           Jouer
         </Link>
         <p className='home__wrapper__description__paragraph'>
-          Enregistrez-vous pour sauvegarder votre score est essayer d'atteindre
+          Enregistrez-vous pour sauvegarder votre score et essayer d'atteindre
           les premières places du classement.
         </p>
         <Link className='home__wrapper__start' to='/signup'>
