@@ -27,7 +27,7 @@ const Home = () => {
           Enregistrez-vous pour sauvegarder votre score est essayer d'atteindre
           les premières places du classement.
         </p>
-        <Link className='home__wrapper__start' to='/register'>
+        <Link className='home__wrapper__start' to='/signup'>
           Créer mon compte
         </Link>
       </div>

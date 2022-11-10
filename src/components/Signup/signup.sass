@@ -1,0 +1,50 @@
+@import "../../static/css/_vars"
+.signup
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 100%
+
+    &__title
+        font-size: 2.5rem
+        color: #FF6700
+        margin-bottom: 2rem
+
+    &__form
+        display: flex
+        flex-direction: column
+
+        &__element
+            display: flex
+            flex-direction: column
+            width: 350px
+            margin-bottom: 1rem
+
+            &__label
+                color: #16584b
+                font-weight: bold
+                margin-bottom: .25rem
+
+            &__input
+                font-size: 2rem
+                padding: .5rem
+                width: 100%
+                color: $primaryColor
+            
+        &__submit
+            border: none
+            background-color: $primaryColorLight
+            color: white
+            font-size: 2rem
+            padding: 1rem 2rem
+            border-bottom: 5px solid $primaryColor
+            text-transform: uppercase
+            margin-bottom: 2rem
+
+            &:hover
+                cursor: pointer
+                background-color: $primaryColorExtraLight
+
+            
+
+            

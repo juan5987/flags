@@ -1,9 +1,10 @@
+@import "../../static/css/_vars"
+    
 .quiz
     display: flex
     flex-direction: column
     align-items: center
     width: 100%
-    background-color: #EFE7DA
 
     &__top
         display: flex
@@ -20,18 +21,18 @@
             flex: 1
 
         &_title
-            color: #16584b
+            color: $primaryColor
             font-size: 3rem
             font-weight: bold
             text-transform: uppercase
 
         &__score
-            color: #16584b
+            color: $primaryColor
             font-size: 10rem
             font-weight: bold
 
         &__loading
-            color: #16584b
+            color: $primaryColor
 
     &__answer
         display: flex
@@ -43,9 +44,9 @@
             font-size: 3rem
             text-align: center
             text-transform: uppercase
-            color: #16584b
+            color: $primaryColor
             background-color: #d5e7e4
-            border: 5px solid #16584b
+            border: 5px solid $primaryColor
             width: 100%
             margin: 0 2rem
             margin-bottom: 3rem
@@ -61,7 +62,7 @@
             margin-right: 4rem
 
         &__submit, &__pass
-            background-color: #23967F
+            background-color: $primaryColorLight
             color: white
             font-size: 2rem
             padding: 1rem 2rem
@@ -137,7 +138,7 @@
 
 
             &__next, &__pass
-                background-color: #16584b
+                background-color: $primaryColor
                 color: white
                 font-size: 2rem
                 padding: 1rem 2rem
@@ -168,7 +169,7 @@
             box-shadow: 5px 5px 5px -3px #999999
 
             &__title
-                color: #16584b
+                color: $primaryColor
                 font-size: 4rem
                 text-transform: uppercase
                 margin-bottom: 2rem
@@ -182,7 +183,7 @@
                 display: flex
 
                 &__play, &__quit
-                    background-color: #16584b
+                    background-color: $primaryColor
                     color: white
                     font-size: 2rem
                     padding: 1rem 2rem
@@ -226,7 +227,7 @@
                 text-align: center
 
                 &__label, &__value
-                    color: #16584b
+                    color: $primaryColor
                     font-size: 1.5rem
                     font-weight: bold
 

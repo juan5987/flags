@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap')
+@import "../../static/css/_vars"
 
 .home
     display: flex
@@ -8,7 +9,7 @@
     &__title
         text-align: center
         font-size: 8rem
-        color: #FF6700
+        color: $secondaryColor
         font-family: 'Pacifico', 'Roboto', sans-serif
         margin-bottom: 2rem
 
@@ -27,16 +28,16 @@
                 margin-bottom: 2rem
 
         &__start
-            background-color: #23967F
+            background-color: $primaryColorLight
             color: white
             font-size: 2rem
             padding: 1rem 2rem
-            border-bottom: 5px solid #16584b
+            border-bottom: 5px solid $primaryColor
             text-transform: uppercase
             margin-bottom: 2rem
 
             &:hover
-                background-color: #5bccb5
+                background-color: $primaryColorExtraLight
 
 
 @media all and (max-width: 1200px)
