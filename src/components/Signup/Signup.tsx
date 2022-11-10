@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import './signup.sass';
 
 const Signup = () => {
@@ -68,6 +69,7 @@ const Signup = () => {
           Valider
         </button>
       </form>
+      <Footer />
     </div>
   );
 };

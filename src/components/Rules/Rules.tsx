@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import './rules.sass';
 
 const Rules = () => {
@@ -60,6 +61,7 @@ const Rules = () => {
           </li>
         </ol>
       </div>
+      <Footer />
     </div>
   );
 };

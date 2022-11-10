@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
 import { Link } from 'react-router-dom';
 
 import './home.sass';
@@ -31,6 +33,7 @@ const Home = () => {
           Créer mon compte
         </Link>
       </div>
+      <Footer />
     </div>
   );
 };

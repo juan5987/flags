@@ -192,7 +192,6 @@ const Quiz = () => {
           </div>
         </div>
       )}
-      <Footer />
       {gameOver && (
         <div className='quiz__gameover'>
           <div className='quiz__gameover__content'>
@@ -214,6 +213,7 @@ const Quiz = () => {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };
