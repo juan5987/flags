@@ -193,3 +193,49 @@
                     &:hover
                         cursor: pointer
                         background-color: #5bccb5
+
+    &__mobile
+        display: none
+
+@media all and (max-width: 400px)
+    .quiz
+
+        &__top
+
+            &__left
+                display: none
+
+            &__flag
+                width: 100%
+                height: auto
+                padding: 0 2rem
+
+            &__right
+                display: none
+
+        &__mobile
+            display: flex
+            justify-content: space-between
+            width: 100%
+            padding: 0 2rem
+            margin-bottom: 1rem
+
+            &__score, &__timer
+                display: flex
+                flex-direction: column
+                text-align: center
+
+                &__label, &__value
+                    color: #16584b
+                    font-size: 1.5rem
+                    font-weight: bold
+
+        &__buttons
+            padding: 0 2rem
+            margin-bottom: 2rem
+
+            &__pass, &__submit
+                font-size: 2rem
+
+            &__pass
+                margin-right: 2rem

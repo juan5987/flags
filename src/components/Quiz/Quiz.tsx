@@ -17,7 +17,7 @@ const Quiz = () => {
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(false);
   const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(90);
+  const [timer, setTimer] = useState(900);
   const [intervalId, setIntervalId] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -99,6 +99,16 @@ const Quiz = () => {
   return (
     <div className='quiz'>
       <Header />
+      <div className='quiz__mobile'>
+        <div className='quiz__mobile__score'>
+          <h2 className='quiz__mobile__score__label'>Score</h2>
+          <span className='quiz__mobile__score__value'>{score}</span>
+        </div>
+        <div className='quiz__mobile__timer'>
+          <h2 className='quiz__mobile__timer__label'>Temps restant</h2>
+          <span className='quiz__mobile__timer__value'>{timer}</span>
+        </div>
+      </div>
       <div className='quiz__top'>
         <div className='quiz__top__left'>
           <h2 className='quiz__top_title'>Score</h2>
