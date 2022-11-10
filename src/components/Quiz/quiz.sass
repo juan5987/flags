@@ -197,7 +197,7 @@
     &__mobile
         display: none
 
-@media all and (max-width: 400px)
+@media all and (max-width: 1200px)
     .quiz
 
         &__top
@@ -239,3 +239,37 @@
 
             &__pass
                 margin-right: 2rem
+
+        &__result
+            align-items: flex-start
+            margin-top: 2rem
+
+            &__content
+
+                &__next
+                    font-size: 1.5rem
+
+                &__correct, &__incorrect
+                    font-size: 2.5rem
+
+                &__solution
+                    font-size: 2rem
+
+        &__gameover
+
+            &__content
+
+                &__title
+                    font-size: 2rem
+
+                &__score
+                    font-size: 2rem
+
+                &__buttons
+
+                    &__play, &__quit
+                        font-size: 1.5rem
+                        border: none
+
+                    &__play
+                        margin-right: 1rem
