@@ -2,65 +2,85 @@ import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './rules.sass';
+import { Link } from 'react-router-dom';
 
 const Rules = () => {
   return (
     <div className='rules'>
-      <Header />
-      <div className='rules__wrapper'>
-        <h2 className='rules__wrapper__title'>Les règles de World Flags</h2>
-        <ol className='rules__wrapper__list'>
-          <li className='rules__wrapper__list__element'>
-            <span className='rules__wrapper__list__element__title'>
-              1. Temps de jeu:
-            </span>
-            <span className='rules__wrapper__list__element__content'>
-              Vous avez 90 secondes pour réaliser le quiz et cumuler un maximum
-              de points suite à quoi la partie se termine.
-            </span>
-          </li>
-          <li className='rules__wrapper__list__element'>
-            <span className='rules__wrapper__list__element__title'>
-              2. Syntaxe
-            </span>
-            <span className='rules__wrapper__list__element__content'>
-              Attention, la syntaxe doit être parfaitement respectée pour que la
-              réponse soit considérée correcte. N'oubliez pas les accents, les
-              espaces ou encore les tirets ! Une tolérance est accordée pour les
-              majuscules.
-            </span>
-          </li>
-          <li className='rules__wrapper__list__element'>
-            <span className='rules__wrapper__list__element__title'>
-              3. Score:{' '}
-            </span>
-            <span className='rules__wrapper__list__element__content'>
-              En cas de bonne réponse, vous gagnez 3 points, si vous passez ou
-              que vous vous trompez, vous perdrez 1 point.
-            </span>
-          </li>
-          <li className='rules__wrapper__list__element'>
-            <span className='rules__wrapper__list__element__title'>
-              4. Sauvegarde du score:{' '}
-            </span>
-            <span className='rules__wrapper__list__element__content'>
-              Une fois la partie terminée, votre score est sauvegardé uniquement
-              si vous avez créé un compte et que vous vous êtes authentifié.
-            </span>
-          </li>
-          <li className='rules__wrapper__list__element'>
-            <span className='rules__wrapper__list__element__title'>
-              5. Classement:{' '}
-            </span>
-            <span className='rules__wrapper__list__element__content'>
-              Quand vous réalisez votre meilleur score, ce dernier est
-              enregistré. Si vous réalisez un des 10 meilleurs scores de tous
-              les utilisateurs, ce dernier apparaitra sur la page "meilleurs
-              scores"
-            </span>
-          </li>
-        </ol>
-      </div>
+      <div className='rules__background'></div>
+      <h2 className='rules__title'>Les règles de World Flags</h2>
+      <ol className='rules__list'>
+        <li className='rules__list__element'>
+          <Link className='rules__list__element__button' to='/'>
+            Retourner au menu principal
+          </Link>
+        </li>
+        <li className='rules__list__element'>
+          <span className='rules__list__element__title'>
+            1. Règles générales:
+          </span>
+          <span className='rules__list__element__content'>
+            Un quiz dure <b>90 secondes</b>, pendant ce temps, vous devez
+            cumuler un maximum de points.{' '}
+            <b>Pour chaque bonne réponse, vous gagnez 3 points</b>. Mais
+            attention,{' '}
+            <b>
+              si vous ne trouvez pas la réponse en passant ou en vous trompant,
+              vous perdez 1 points
+            </b>
+            .
+          </span>
+          <span className='rules__list__element__content'>
+            A vous de faire le bon choix, passer, ou prendre le temps de
+            réfléchir pour éviter de perdre top de point.
+          </span>
+        </li>
+        <li className='rules__list__element'>
+          <span className='rules__list__element__title'>2. Syntaxe</span>
+          <span className='rules__list__element__content'>
+            Afin de simplifier le quiz, notamment en raison du temps imparti,
+            World Flags{' '}
+            <b>
+              ne tient pas compte des majuscules, accents, espaces, ou tirets
+            </b>
+            .
+          </span>
+          <span className='rules__list__element__content'>
+            Exemple: si vous répondez <b>cote d'ivoire</b> pour{' '}
+            <b>Côte d'Ivoire</b>, la réponse sera considérée correcte. De même
+            pour <b>etats unis</b> au lieu de <b>États-Unis</b>.
+          </span>
+        </li>
+        <li className='rules__list__element'>
+          <span className='rules__list__element__title'>
+            3. Sauvegarde du score:{' '}
+          </span>
+          <span className='rules__list__element__content'>
+            <b>Vous devez être authentifié</b> pour pouvoir sauvegarder votre
+            score. Si vous souhaitez apparaître dans le classement des meilleurs
+            scores, <b>pensez donc à vous enregistrer</b> sur le site.
+          </span>
+        </li>
+        <li className='rules__list__element'>
+          <span className='rules__list__element__title'>5. Classement: </span>
+          <span className='rules__list__element__content'>
+            A chaque fois que vous réalisez votre <b>record personnel</b>, ce
+            dernier est actualisé dans notre base de données. Vous pourrez vous
+            situer dans le classement{' '}
+            <b>en cliquant sur le bouton classement du menu principal</b>.
+          </span>
+          <span className='rules__list__element__content'>
+            Apprenez en vous amusant et améliorer votre score pour atteindre le
+            haut du classement.
+          </span>
+        </li>
+        <li className='rules__list__element'>
+          <Link className='rules__list__element__button' to='/'>
+            Retourner au menu principal
+          </Link>
+        </li>
+      </ol>
+
       <Footer />
     </div>
   );

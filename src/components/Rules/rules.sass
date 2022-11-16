@@ -1,35 +1,84 @@
 @import "../../static/css/_vars"
 
 .rules
+    width: 100vw
+    min-height: 100vh
+    background-image: url('../../static/images/map.jpg')
+    background-size: cover
     display: flex
     flex-direction: column
+    justify-content: flex-start
     align-items: center
-    width: 100%
+    padding-top: 2rem
+    padding-bottom: 4rem
 
-    &__wrapper
+    &__background
+        position: fixed
+        left: 0
+        right: 0
+        top: 0
+        bottom: 0
+        background-color: rgba(57, 88, 57, 0.7)
+        z-index: 0
+        padding: 2rem
+        height: 100%
 
-        &__title
-            color: $primaryColor
+    &__title
+        background-color: rgb(240, 240, 240)
+        border: 20px solid #272927
+        border-radius: 4rem
+        text-align: center
+        font-family: 'Pacifico', 'Roboto', sans-serif
+        font-size: 6rem
+        color: #f86300
+        padding: 0.75rem 3rem
+        margin-bottom: 2rem
+        max-width: 1200px
+        white-space: nowrap
+        z-index: 1
+
+    &__list
+        background-color: white
+        border: 15px solid #272927
+        border-radius: 4rem
+        padding: 2rem 4rem
+        max-width: 1200px
+        z-index: 1
+
+        &__element
+            display: flex
+            flex-direction: column
             text-align: center
-            font-size: 3rem
-            font-weight: bold
-            text-transform: uppercase
-            margin-bottom: 3rem
+            text-align: justify
+            font-weight: normal
 
-        &__list
+            &__title
+                color: $primaryColor
+                font-weight: bold
+                font-size: 2rem
+                margin-bottom: 1rem
+                text-align: left
 
-            &__element
-                display: flex
-                flex-direction: column
+            &__content
+                font-size: 1.4rem
+                margin-bottom: 2rem
+
+            &__button
+                width: 300px
                 text-align: center
+                color: rgb(240, 240, 240)
+                background-color: rgb(18, 90, 46)
+                margin: 0 auto
+                margin-bottom: 1rem
+                padding: 1.5rem
+                font-size: 1.5rem
+                text-transform: uppercase
+                font-family: cursive
+                border: 5px solid rgb(240, 240, 240)
+                border-radius: 15px
+                transition: background-color 0.25s
+                font-family: 'Roboto', cursive
+                font-weight: bold
 
-                &__title
-                    color: $primaryColor
-                    font-weight: bold
-                    font-size: 2rem
-                    margin-bottom: 1rem
-
-                &__content
-                    font-size: 1.2rem
-                    font-weight: bold
-                    margin-bottom: 2rem
+                &:hover 
+                    background-color: rgb(55, 138, 87)
