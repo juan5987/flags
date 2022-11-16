@@ -10,20 +10,20 @@
     flex-direction: column
     justify-content: space-around
     align-items: center
-    padding: 2rem
 
     &__background
-        position: absolute
+        position: fixed
         left: 0
         right: 0
-        bottom: 0
         top: 0
-        background-color: rgba(34, 59, 34, 0.7)
+        bottom: 0
+        background-color: rgba(57, 88, 57, 0.7)
         z-index: 0
+        padding: 2rem
+        height: 100%
 
 
     &__header 
-        font-family: 'Pacifico', 'Roboto', sans-serif
         margin-bottom: 2rem
         z-index: 1
         background-color: rgb(240, 240, 240)
@@ -33,6 +33,7 @@
 
 
         &__title
+            font-family: 'Pacifico', 'Roboto', sans-serif
             text-align: center
             font-size: 8rem
             color: #f86300
@@ -40,6 +41,7 @@
 
 
         &__subtitle 
+            font-family: 'Roboto', sans-serif
             text-align: center
             font-size: 2rem
             color: #3d413d
@@ -72,4 +74,22 @@
 
             &:hover 
                 background-color: rgb(18, 90, 46)
+
+
+@media all and (max-width: 1200px)
+    .main
+        padding: 1rem
+        background-image: url('../../static/images/map_mobile.jpg')
+
+        &__background
+
+        &__header
+            border: 10px solid black
+            border-radius: 15px
+
+            &__title
+                font-size: 3rem
+
+            &__subtitle
+                font-size: 1.5rem
 
