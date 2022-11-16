@@ -12,11 +12,48 @@ const Signup = () => {
     password_confirm: '',
   });
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState({
+    username: '',
+    email: '',
+    email_confirm: '',
+    password: '',
+    password_confirm: '',
+    global: '',
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formValues);
+
+    if (
+      !formValues.username ||
+      !formValues.email ||
+      !formValues.email_confirm ||
+      !formValues.password ||
+      !formValues.password_confirm
+    ) {
+      setError({
+        ...error,
+        global: 'Tous les champs doivent être renseignés',
+      });
+    } else if (
+      formValues.username.length < 3 ||
+      formValues.username.length > 18
+    ) {
+      setError({
+        ...error,
+        global: '',
+        username: "Le nom d'utilisateur doit contenir entre 3 et 18 caractères",
+      });
+    } else {
+      setError({
+        username: '',
+        email: '',
+        email_confirm: '',
+        password: '',
+        password_confirm: '',
+        global: '',
+      });
+    }
   };
 
   const handleChange = (e: any) => {
@@ -43,9 +80,9 @@ const Signup = () => {
             value={formValues.username}
             autoComplete='username'
           />
-          {error && (
+          {error.username && (
             <span className='signup__form__element__error'>
-              Ce nom d'utilisateur est déjà utilisé
+              {error.username}
             </span>
           )}
         </div>
@@ -61,10 +98,8 @@ const Signup = () => {
             value={formValues.email}
             autoComplete='email'
           />
-          {error && (
-            <span className='signup__form__element__error'>
-              Cette adresse email est déjà utilisée
-            </span>
+          {error.email && (
+            <span className='signup__form__element__error'>{error.email}</span>
           )}
         </div>
         <div className='signup__form__element'>
@@ -82,9 +117,9 @@ const Signup = () => {
             value={formValues.email_confirm}
             autoComplete='email'
           />
-          {error && (
+          {error.email_confirm && (
             <span className='signup__form__element__error'>
-              L'adresse mail ne correspond pas
+              {error.email_confirm}
             </span>
           )}
         </div>
@@ -100,9 +135,9 @@ const Signup = () => {
             value={formValues.password}
             autoComplete='new-password'
           />
-          {error && (
+          {error.password && (
             <span className='signup__form__element__error'>
-              Le mot de passe doit contenir au moins 8 caractères
+              {error.password}
             </span>
           )}
         </div>
@@ -121,12 +156,15 @@ const Signup = () => {
             value={formValues.password_confirm}
             autoComplete='new-password'
           />
-          {error && (
+          {error.password_confirm && (
             <span className='signup__form__element__error'>
-              Le mot de passe doit contenir au moins 8 caractères
+              {error.password_confirm}
             </span>
           )}
         </div>
+        {error.global && (
+          <span className='signup__form__element__error'>{error.global}</span>
+        )}
         <button className='signup__form__submit' type='submit'>
           Valider
         </button>

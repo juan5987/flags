@@ -8,33 +8,29 @@ import './home.sass';
 
 const Home = () => {
   return (
-    <div className='home'>
-      <Header />
-      <h1 className='home__title'>World Flags</h1>
-      <div className='home__wrapper'>
-        <div className='home__wrapper__description'>
-          <p className='home__wrapper__description__paragraph'>
-            Vous pensez connaitre la plupart des drapeaux du monde ? Ou vous
-            souhaitez améliorer vos connaissances à ce sujet ? World Flags est
-            fait pour vous !
-          </p>
-          <p className='home__wrapper__description__paragraph'>
-            Apprenez en jouant grâce à notre quiz.
-          </p>
-        </div>
-        <Link className='home__wrapper__start' to='/quiz'>
+    <main className='main'>
+      <div className='main__background' />
+      <header className='main__header'>
+        <h1 className='main__header__title'>World Flags</h1>
+        <h3 className='main__header__subtitle'>
+          Devinez les drapeaux et entrez dans le top du classement
+        </h3>
+      </header>
+      <div className='main__menu'>
+        <Link to='/quiz' className='main__menu__button'>
           Jouer
         </Link>
-        <p className='home__wrapper__description__paragraph'>
-          Enregistrez-vous pour sauvegarder votre score et essayer d'atteindre
-          les premières places du classement.
-        </p>
-        <Link className='home__wrapper__start' to='/signup'>
-          Créer mon compte
+        <Link to='/rules' className='main__menu__button'>
+          Règles
+        </Link>
+        <Link to='/scores' className='main__menu__button'>
+          Classement
+        </Link>
+        <Link to='login' className='main__menu__button'>
+          Connexion
         </Link>
       </div>
-      <Footer />
-    </div>
+    </main>
   );
 };
 
