@@ -1,16 +1,33 @@
 @import "../../static/css/_vars"
     
-.quiz
+.quiz 
+    width: 100vw
+    min-height: 100vh
+    background-image: url('../../static/images/map.jpg')
+    background-size: cover
+    background-position: center
     display: flex
     flex-direction: column
+    justify-content: space-around
     align-items: center
-    width: 100%
+
+    &__background
+        position: fixed
+        left: 0
+        right: 0
+        top: 0
+        bottom: 0
+        background-color: rgba(57, 88, 57, 0.7)
+        z-index: 0
+        padding: 2rem
+        height: 100%
 
     &__top
         display: flex
         justify-content: space-between
         align-items: center
         width: 100%
+        z-index: 1
 
         &__left, &__right
             flex: 1
@@ -21,13 +38,13 @@
             flex: 1
 
         &_title
-            color: $primaryColor
+            color: white
             font-size: 3rem
             font-weight: bold
             text-transform: uppercase
 
         &__score
-            color: $primaryColor
+            color: white
             font-size: 10rem
             font-weight: bold
 
@@ -39,14 +56,15 @@
         justify-content: center
         width: 100%
         flex-wrap: wrap
+        z-index: 1
 
         &__letter
             font-size: 3rem
             text-align: center
             text-transform: uppercase
             color: $primaryColor
-            background-color: #d5e7e4
-            border: 5px solid $primaryColor
+            background-color: #e3ebe7
+            border: 5px solid #3d413d
             width: 100%
             margin: 0 2rem
             margin-bottom: 3rem
@@ -57,22 +75,30 @@
     &__buttons
         display: flex
         justify-content: center
+        z-index: 1
 
-        &__pass
-            margin-right: 4rem
-
-        &__submit, &__pass
-            background-color: $primaryColorLight
-            color: white
-            font-size: 2rem
-            padding: 1rem 2rem
-            border: none
-            border-bottom: 5px solid 
+        &__button 
+            width: 300px
+            text-align: center
+            color: rgb(240, 240, 240)
+            background-color: #272927
             margin-bottom: 2rem
+            padding: 1.5rem
+            font-size: 1.5rem
+            text-transform: uppercase
+            font-family: cursive
+            border: 5px solid rgb(240, 240, 240)
+            border-radius: 15px
+            transition: background-color 0.25s
+            font-family: 'Roboto', cursive
+            font-weight: bold
 
             &:hover
                 cursor: pointer
-                background-color: #5bccb5
+                background-color: rgb(18, 90, 46)
+
+            &:first-child
+                margin-right: 2rem
 
     &__result
         display: flex
@@ -81,6 +107,7 @@
         width: 100vw
         height: 100vh
         position: fixed
+        z-index: 1
 
         &__content
             display: flex
@@ -159,6 +186,8 @@
         flex-direction: column
         justify-content: center
         align-items: center
+        z-index: 1
+        background-color: rgba(0,0,0,.7)
 
         &__content
             display: flex
@@ -198,6 +227,24 @@
     &__mobile
         display: none
 
+    &__quit
+        position: absolute
+        top: 2rem
+        right: 2rem
+        z-index: 1
+        color: white
+        border: 2px solid white
+        padding: 1rem 2rem
+        font-size: 1.2rem
+        font-weight: bold
+        text-transform: uppercase
+        transition: .3s
+
+        &:hover
+            cursor: pointer
+            background-color: rgba(0,0,0,.4)
+
+
 @media all and (max-width: 1200px)
     .quiz
         background-image: url("../../static/images/map.jpg")
@@ -236,6 +283,10 @@
 
         &__buttons
             padding: 0 2rem
+
+            &__button
+                width: min-content
+                padding: 1rem 2rem
 
             &__pass, &__submit
                 font-size: 2rem
@@ -277,3 +328,10 @@
 
                     &__play
                         margin-right: 1rem
+
+        &__quit
+            display: block
+            position: static
+            margin: 0 auto
+            width: min-content
+            margin-bottom: 1rem

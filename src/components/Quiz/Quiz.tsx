@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getRandomNumber } from '../../utils/randomInt';
+import { normalizeString } from '../../utils/normalizeString';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import check from '../../static/images/check.svg';
@@ -63,9 +64,10 @@ const Quiz = () => {
     setShowResult(true);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (answer) {
-      if (answer?.toLowerCase() === solution?.toLowerCase()) {
+      if (normalizeString(answer) === normalizeString(solution)) {
         setResult(true);
         setScore((score) => score + 3);
       } else {
@@ -98,7 +100,7 @@ const Quiz = () => {
 
   return (
     <div className='quiz'>
-      <Header />
+      <div className='quiz__background'></div>
       <div className='quiz__mobile'>
         <div className='quiz__mobile__score'>
           <h2 className='quiz__mobile__score__label'>Score</h2>
@@ -115,12 +117,15 @@ const Quiz = () => {
           <span className='quiz__top__score'>{score}</span>
         </div>
         <div>
+          <Link className='quiz__quit' to='/'>
+            quitter
+          </Link>
           {!isLoading ? (
             <img
               className='quiz__top__flag'
               src={currentFlag}
               alt='drapeau'
-              height={400}
+              height={300}
             />
           ) : (
             <h2 className='quiz__top__loading'>Sélection du drapeau...</h2>
@@ -132,7 +137,7 @@ const Quiz = () => {
         </div>
       </div>
 
-      <div className='quiz__answer'>
+      <form className='quiz__answer' onSubmit={handleSubmit}>
         {
           <input
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -146,14 +151,12 @@ const Quiz = () => {
           />
         }
         <div className='quiz__buttons'>
-          <button className='quiz__buttons__pass' onClick={handlePass}>
+          <button className='quiz__buttons__button' onClick={handlePass}>
             Passer
           </button>
-          <button className='quiz__buttons__submit' onClick={handleSubmit}>
-            Valider
-          </button>
+          <button className='quiz__buttons__button'>Valider</button>
         </div>
-      </div>
+      </form>
       {showResult && (
         <div className='quiz__result'>
           <div className='quiz__result__content'>
@@ -213,6 +216,7 @@ const Quiz = () => {
           </div>
         </div>
       )}
+
       <Footer />
     </div>
   );
