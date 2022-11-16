@@ -82,3 +82,35 @@
 
                 &:hover 
                     background-color: rgb(55, 138, 87)
+
+
+@media all and (max-width: 1200px)
+    .rules
+        padding: 2rem
+        background-image: url('../../static/images/map_mobile.jpg')
+
+        &__title
+            border: 10px solid black
+            border-radius: 15px
+            font-size: 1.85rem
+            padding: 1rem
+
+        &__list
+            background-color: white
+            border: 10px solid #272927
+            border-radius: 15px
+            padding: 2rem
+            width: min-content
+            z-index: 1
+
+            &__element
+
+                &__title
+                    font-size: 1.3rem
+
+                &__content
+                    font-size: 1.2rem
+
+                &__button
+                    font-size: 1.2rem
+                    padding: .75rem 1rem
