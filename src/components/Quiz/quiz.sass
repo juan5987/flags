@@ -101,13 +101,15 @@
                 margin-right: 2rem
 
     &__result
-        display: flex
-        justify-content: center
-        align-items: center
         width: 100vw
         height: 100vh
         position: fixed
+        display: flex
+        justify-content: center
+        align-items: center
+        margin-top: 2rem
         z-index: 1
+        background-color: rgba(0,0,0,.6)
 
         &__content
             display: flex
@@ -269,7 +271,6 @@
             justify-content: space-between
             width: 100%
             padding: 0 2rem
-            margin-bottom: 1rem
 
             &__score, &__timer
                 display: flex
@@ -296,8 +297,6 @@
                 margin-right: 2rem
 
         &__result
-            align-items: flex-start
-            margin-top: 2rem
 
             &__content
 
@@ -311,7 +310,7 @@
                     font-size: 2rem
 
         &__gameover
-
+            z-index: 2
             &__content
 
                 &__title

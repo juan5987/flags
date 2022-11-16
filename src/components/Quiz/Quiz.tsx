@@ -51,7 +51,6 @@ const Quiz = () => {
         const randomInt = getRandomNumber(1, 202);
         setCurrentFlag(actualCountries[randomInt].flag);
         setSolution(actualCountries[randomInt].translations.fr);
-        inputRef.current.focus();
       })
       .finally(() => {
         setIsLoading(false);
@@ -64,7 +63,7 @@ const Quiz = () => {
     setShowResult(true);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (answer) {
       if (normalizeString(answer) === normalizeString(solution)) {
@@ -76,6 +75,7 @@ const Quiz = () => {
       }
       setShowResult(true);
     }
+    e.target[0].blur();
   };
 
   const handleNextFlag = () => {
@@ -83,7 +83,6 @@ const Quiz = () => {
     const randomNumber = getRandomNumber(1, 202);
     setCurrentFlag(allCountries[randomNumber].flag);
     setSolution(allCountries[randomNumber].translations.fr);
-    inputRef.current.focus();
     setAnswer('');
   };
 
