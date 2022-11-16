@@ -11,11 +11,6 @@ const Rules = () => {
       <h2 className='rules__title'>Les règles de World Flags</h2>
       <ol className='rules__list'>
         <li className='rules__list__element'>
-          <Link className='rules__list__element__button' to='/'>
-            Retourner au menu principal
-          </Link>
-        </li>
-        <li className='rules__list__element'>
           <span className='rules__list__element__title'>
             1. Règles générales:
           </span>
