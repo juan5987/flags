@@ -23,7 +23,7 @@ const Home = () => {
         <Link to='/rules' className='home__menu__button'>
           Règles
         </Link>
-        <Link to='/scores' className='home__menu__button'>
+        <Link to='/rank' className='home__menu__button'>
           Classement
         </Link>
         <Link to='login' className='home__menu__button'>

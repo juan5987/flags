@@ -4,6 +4,7 @@ import Home from '../Home/Home';
 import Quiz from '../Quiz/Quiz';
 import Rules from '../Rules/Rules';
 import Signup from '../Signup/Signup';
+import Rank from '../Rank/Rank';
 import './app.sass';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
             <Route path='/quiz' element={<Quiz />}></Route>
             <Route path='/rules' element={<Rules />}></Route>
             <Route path='/signup' element={<Signup />}></Route>
+            <Route path='/rank' element={<Rank />}></Route>
           </Routes>
         </Router>
       </div>

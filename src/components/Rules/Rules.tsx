@@ -64,9 +64,10 @@ const Rules = () => {
         <li className='rules__list__element'>
           <span className='rules__list__element__title'>5. Classement: </span>
           <span className='rules__list__element__content'>
-            A chaque fois que vous réalisez votre <b>record personnel</b>, ce
-            dernier est actualisé dans notre base de données. Vous pourrez vous
-            situer dans le classement{' '}
+            La première fois que vous jouez, puis à chaque fois que vous
+            réalisez votre <b>record personnel</b>, ce dernier est actualisé
+            dans notre base de données. Vous pourrez vous situer dans le
+            classement{' '}
             <b>en cliquant sur le bouton classement du menu principal</b>.
           </span>
           <span className='rules__list__element__content'>
