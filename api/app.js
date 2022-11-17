@@ -1,17 +1,7 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const userRoutes = require('./routes/user');
-
 require('dotenv').config();
+const express = require('express');
+const userRoutes = require('./routes/user');
 const app = express();
-
-mongoose
-  .connect(
-    `mongodb+srv://juan:${process.env.DB_PASSWORD}@cluster0.ilqi9c6.mongodb.net/?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use(express.json());
 
@@ -28,6 +18,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send('WorldFlags API v1.0');
+});
 app.use('/auth', userRoutes);
 
 module.exports = app;
