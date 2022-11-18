@@ -30,13 +30,13 @@
         background-color: rgb(240, 240, 240)
         border-radius: 4rem
         padding: 0.75rem 2rem
-        border: 20px solid #272927
+        border: 15px solid #272927
 
 
         &__title
             font-family: 'Pacifico', 'Roboto', sans-serif
             text-align: center
-            font-size: 8rem
+            font-size: 6rem
             color: #f86300
             margin-bottom: 1rem
 
@@ -49,6 +49,25 @@
             z-index: 1
             margin-bottom: 2rem
 
+    &__score
+        display: flex
+        flex-direction: column
+        margin-bottom: 2rem
+
+        &__welcome
+            font-size: 2rem
+            font-weight: bold
+            color: white
+            z-index: 1
+            text-align: center
+            margin-bottom: 1rem
+
+        &__content
+            font-size: 1.5rem
+            font-weight: bold
+            color: white
+            z-index: 1
+            text-align: center
 
     &__menu 
         display: flex
@@ -74,8 +93,8 @@
             font-weight: bold
 
             &:hover 
+                cursor: pointer
                 background-color: rgb(18, 90, 46)
-
 
 @media all and (max-width: 1200px)
     .home

@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap')
+
+.login
+    position: fixed
+    width: 100vw
+    min-height: 100vh
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    background-color: rgba(0,0,0,.9)
+    z-index: 2
+
+    &__title
+        font-size: 4rem
+        color: orange
+        z-index: 1
+        text-transform: uppercase
+        margin-bottom: 2rem
+        text-align: center
+        font-family: 'Roboto', cursive
+
+    &__form
+        display: flex
+        flex-direction: column
+        z-index: 1
+        background-color: #1a1a1a
+        padding: 2rem
+        border-radius: 15px
+        position: relative
+
+        &__element
+            display: flex
+            flex-direction: column
+            min-width: 550px
+            margin-bottom: 2rem
+            
+            &__label
+                font-size: 1.5rem
+                font-weight: bold
+                margin-bottom: .25rem
+                color: white
+
+            &__input
+                font-size: 2rem
+                padding: 1rem 2rem
+
+        &__submit
+            font-size: 2rem
+            padding: 1rem 2rem
+            background-color: orange
+            color: white
+            border: none
+            border-radius: 4px
+            cursor: pointer
+            margin: 0 auto
+
+            &:hover
+                background-color: #f8be00
+
+        &__close
+            width: 60px
+            height: 60px
+            display: flex
+            justify-content: center
+            align-items: center
+            border: 5px solid white
+            border-radius: 50%
+            position: absolute
+            top: calc(-60px - 1rem)
+            right: calc(-60px - 1rem)
+
+            &:hover &__line1,  &:hover &__line2
+                background-color: orange
+
+            &:hover
+                border: 5px solid orange
+                cursor: pointer
+                 
+
+            &__line1, &__line2
+                width: 100%
+                height: 5px
+                background-color: white
+            
+            &__line1
+                transform: rotate(45deg)
+                position: relative
+                left: 13px
+
+            &__line2    
+                transform: rotate(-45deg)
+                position: relative
+                right: 13px
+        
+        &__error
+            color: red
+            font-size: 1.2rem
+            font-weight: bold
+            margin-bottom: 1rem
+            text-align: center

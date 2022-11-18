@@ -139,6 +139,8 @@ exports.login = (req, res, next) => {
               console.log(`Utilisateur ${user.username} connecté.`);
               res.status(200).json({
                 userId: user.id,
+                username: user.username,
+                bestScore: user.best_score,
                 token: jwt.sign(
                   { userId: user.id },
                   process.env.RANDOM_TOKEN_SECRET,
