@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { Link } from 'react-router-dom';
 import './signup.sass';
 
 const Signup = () => {
@@ -44,6 +45,20 @@ const Signup = () => {
         global: '',
         username: "Le nom d'utilisateur doit contenir entre 3 et 18 caractères",
       });
+    } else if (formValues.email !== formValues.email_confirm) {
+      setError({
+        ...error,
+        global: '',
+        email: 'Les adresses email ne correspondent pas',
+        email_confirm: 'Les adresses email ne correspondent pas',
+      });
+    } else if (formValues.password !== formValues.password_confirm) {
+      setError({
+        ...error,
+        global: '',
+        password: 'Les mots de passe ne correspondent pas',
+        password_confirm: 'Les mots de passe ne correspondent pas',
+      });
     } else {
       setError({
         username: '',
@@ -65,9 +80,13 @@ const Signup = () => {
 
   return (
     <div className='signup'>
-      <Header />
-      <h2 className='signup__title'>Création d'un compte</h2>
+      <Link className='signup__form__close' to='/'>
+        <div className='signup__form__close__line1'></div>
+        <div className='signup__form__close__line2'></div>
+      </Link>
+      <div className='signup__background'></div>
       <form className='signup__form' onSubmit={handleSubmit}>
+        <h2 className='signup__title'>Inscription</h2>
         <div className='signup__form__element'>
           <label className='signup__form__element__label' htmlFor='username'>
             Nom d'utilisateur
@@ -169,7 +188,9 @@ const Signup = () => {
           Valider
         </button>
       </form>
-      <Footer />
+      <Link to='/' className='signup__home'>
+        Retour au menu principal
+      </Link>
     </div>
   );
 };

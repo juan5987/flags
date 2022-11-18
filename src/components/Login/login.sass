@@ -4,6 +4,7 @@
     position: fixed
     width: 100vw
     min-height: 100vh
+    top: 0
     display: flex
     flex-direction: column
     justify-content: center
@@ -12,19 +13,19 @@
     z-index: 2
 
     &__title
-        font-size: 4rem
+        font-size: 2.5rem
         color: orange
-        z-index: 1
-        text-transform: uppercase
         margin-bottom: 2rem
+        z-index: 1
+        border: 3px solid orange
+        padding: 1rem 0
         text-align: center
-        font-family: 'Roboto', cursive
+        width: 100%
 
     &__form
         display: flex
         flex-direction: column
         z-index: 1
-        background-color: #1a1a1a
         padding: 2rem
         border-radius: 15px
         position: relative
@@ -32,18 +33,19 @@
         &__element
             display: flex
             flex-direction: column
-            min-width: 550px
-            margin-bottom: 2rem
-            
+            width: 350px
+            margin-bottom: 1rem
+
             &__label
-                font-size: 1.5rem
+                color: orange
                 font-weight: bold
                 margin-bottom: .25rem
-                color: white
 
             &__input
                 font-size: 2rem
-                padding: 1rem 2rem
+                padding: .5rem
+                width: 100%
+                color: black
 
         &__submit
             font-size: 2rem
@@ -67,8 +69,8 @@
             border: 5px solid white
             border-radius: 50%
             position: absolute
-            top: calc(-60px - 1rem)
-            right: calc(-60px - 1rem)
+            top: 1rem
+            right: 1rem
 
             &:hover &__line1,  &:hover &__line2
                 background-color: orange

@@ -1,19 +1,77 @@
 @import "../../static/css/_vars"
 .signup
+    width: 100vw
+    min-height: 100vh
+    background-image: url('../../static/images/map.jpg')
+    background-size: cover
+    background-position: center
     display: flex
     flex-direction: column
+    justify-content: center
     align-items: center
-    width: 100%
+
+    &__background
+        position: fixed
+        left: 0
+        right: 0
+        top: 0
+        bottom: 0
+        background-color: rgba(0, 0, 0, 0.8)
+        z-index: 0
+        padding: 2rem
+        height: 100%
 
     &__title
         font-size: 2.5rem
-        color: #FF6700
+        color: orange
         margin-bottom: 2rem
+        z-index: 1
+        border: 3px solid orange
+        padding: 1rem 0
+        text-align: center
+        width: 100%
 
     &__form
         display: flex
         flex-direction: column
         margin-top: 1rem
+        z-index: 1
+
+        &__close
+            width: 60px
+            height: 60px
+            display: flex
+            justify-content: center
+            align-items: center
+            border: 5px solid white
+            border-radius: 50%
+            position: absolute
+            top: 1rem
+            right: 1rem
+            z-index: 1
+
+            &:hover &__line1,  &:hover &__line2
+                background-color: orange
+
+            &:hover
+                border: 5px solid orange
+                cursor: pointer
+                 
+
+            &__line1, &__line2
+                width: 100%
+                height: 5px
+                background-color: white
+            
+            &__line1
+                transform: rotate(45deg)
+                position: relative
+                left: 13px
+
+            &__line2    
+                transform: rotate(-45deg)
+                position: relative
+                right: 13px
 
         &__element
             display: flex
@@ -22,7 +80,7 @@
             margin-bottom: 1rem
 
             &__label
-                color: #16584b
+                color: orange
                 font-weight: bold
                 margin-bottom: .25rem
 
@@ -30,30 +88,42 @@
                 font-size: 2rem
                 padding: .5rem
                 width: 100%
-                color: $primaryColor
+                color: black
 
             &__error
                 font-weight: bold
                 color: red
                 text-align: center
                 margin-top: .25rem
-
             
         &__submit
-            border: none
-            background-color: $primaryColorLight
-            color: white
             font-size: 2rem
             padding: 1rem 2rem
-            border-bottom: 5px solid $primaryColor
-            text-transform: uppercase
-            margin-bottom: 2rem
-            margin-top: 2rem
+            background-color: orange
+            color: white
+            border: none
+            border-radius: 4px
+            cursor: pointer
+            margin: 1rem auto
 
             &:hover
-                cursor: pointer
-                background-color: $primaryColorExtraLight
+                background-color: #f8be00
+    
+    &__home
+        display: none
 
-            
+@media all and (max-width: 1200px)
 
-            
+    .signup
+
+        &__home
+            display: block
+            color: white
+            z-index: 1
+            margin-top: 1rem
+            margin-bottom: 2rem
+            font-size: 1.5rem
+            text-decoration: underline
+
+        &__form__close
+            display: none

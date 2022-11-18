@@ -3,19 +3,15 @@ import './login.sass';
 
 const Login = ({ displayFunction, submitFunction, error }: any) => {
   return (
-    <div className='login' onMouseDown={() => displayFunction(false)}>
-      <form
-        className='login__form'
-        onSubmit={submitFunction}
-        onMouseDown={(e: any) => e.stopPropagation()}
+    <div className='login'>
+      <div
+        className='login__form__close'
+        onClick={() => displayFunction(false)}
       >
-        <div
-          className='login__form__close'
-          onClick={() => displayFunction(false)}
-        >
-          <div className='login__form__close__line1'></div>
-          <div className='login__form__close__line2'></div>
-        </div>
+        <div className='login__form__close__line1'></div>
+        <div className='login__form__close__line2'></div>
+      </div>
+      <form className='login__form' onSubmit={submitFunction}>
         <h2 className='login__title'>Connexion</h2>
         <div className='login__form__element'>
           <label className='login__form__element__label' htmlFor='email'>

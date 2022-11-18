@@ -5,7 +5,8 @@ import { UserContext } from '../App/App';
 import './home.sass';
 
 const Home = () => {
-  const [isLoginModalOpened, setIsLoginModalOpened]: any = useState(false);
+  const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
+  const [isSignupModalOpened, setIsSignupModalOpened] = useState(false);
   const [formError, setFormError] = useState('');
   const context: any = useContext(UserContext);
 
@@ -108,6 +109,12 @@ const Home = () => {
             Connexion
           </button>
         )}
+        <Link
+          to='/signup'
+          className='home__menu__button home__menu__button--signup'
+        >
+          Inscription
+        </Link>
       </div>
     </div>
   );
