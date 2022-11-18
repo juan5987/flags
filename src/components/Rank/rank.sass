@@ -37,8 +37,10 @@
     &__list
         display: flex
         flex-direction: column
-        align-items: center
+        align-items: flex-start
         z-index: 1
+        background-color: rgba(0,0,0,.7)
+        padding: 2rem
 
         &__element
             display: flex
@@ -87,7 +89,7 @@
                 color: #f86300
 
             &__username, &__score, &__date
-                color: #22927c
+                color: black
 
     &__button
         text-align: center
@@ -95,10 +97,9 @@
         background-color: #272927
         margin: 0 auto
         margin-bottom: 1rem
-        padding: 1.5rem
-        font-size: 1.3rem
+        padding: 1rem 2rem
+        font-size: 1rem
         text-transform: uppercase
-        font-family: cursive
         border: 5px solid rgb(240, 240, 240)
         border-radius: 15px
         transition: background-color 0.25s
