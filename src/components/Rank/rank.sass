@@ -1,0 +1,112 @@
+.rank 
+    width: 100vw
+    min-height: 100vh
+    background-image: url('../../static/images/map.jpg')
+    background-size: cover
+    background-position: center
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+    align-items: center
+
+    &__background
+        position: fixed
+        left: 0
+        right: 0
+        top: 0
+        bottom: 0
+        background-color: rgba(57, 88, 57, 0.7)
+        z-index: 0
+        padding: 2rem
+        height: 100%
+
+    &__title
+        background-color: rgb(240, 240, 240)
+        border: 20px solid #272927
+        border-radius: 4rem
+        text-align: center
+        font-family: 'Pacifico', 'Roboto', sans-serif
+        font-size: 4rem
+        color: #f86300
+        padding: 0.75rem 3rem
+        margin-bottom: 2rem
+        max-width: 1200px
+        white-space: nowrap
+        z-index: 1
+
+    &__list
+        display: flex
+        flex-direction: column
+        align-items: center
+        z-index: 1
+
+        &__element
+            display: flex
+            align-items: center
+
+            &__wrapper
+                height: 450px
+                overflow-y:  scroll
+
+            &--head
+                display: flex
+                align-items: center
+                font-weight: bold
+                text-transform: uppercase
+
+                &__rank, &__username, &__score, &__date
+                    padding: 1rem
+                    background-color: white
+                    margin-right: 2px
+                    font-size: 1.2rem
+                    width: 150px
+                    text-align: center
+                    margin-right: 20px
+                    margin-bottom: 20px
+                    width: 250px
+
+                &__rank
+                    background-color: #f86300
+                    color: white
+
+                &__username, &__score, &__date
+                    background-color: #22927c
+                    color: white
+
+            &__rank, &__username, &__score, &__date
+                padding: 1rem
+                background-color: white
+                margin-right: 20px
+                font-size: 1.2rem
+                width: 250px
+                text-align: center
+                margin-bottom: 20px
+                font-weight: bold
+
+            &__rank
+                color: #f86300
+
+            &__username, &__score, &__date
+                color: #22927c
+
+    &__button
+        text-align: center
+        color: rgb(240, 240, 240)
+        background-color: #272927
+        margin: 0 auto
+        margin-bottom: 1rem
+        padding: 1.5rem
+        font-size: 1.3rem
+        text-transform: uppercase
+        font-family: cursive
+        border: 5px solid rgb(240, 240, 240)
+        border-radius: 15px
+        transition: background-color 0.25s
+        font-family: 'Roboto', cursive
+        font-weight: bold
+        z-index: 1
+        white-space: nowrap
+
+        &:hover
+            cursor: pointer
+            background-color: #22927c
