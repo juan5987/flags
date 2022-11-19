@@ -25,22 +25,22 @@ const Home = () => {
       const requestOptions: any = {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        data: {
+        data: JSON.stringify({
           email,
           password,
-        },
+        }),
         url: `${context.apiUrl}/auth/login`,
       };
 
       axios(requestOptions)
         .then((result: any) => {
-          if (result.response.status === 200) {
-            localStorage.setItem('userId', result.userId);
-            localStorage.setItem('token', result.token);
-            context.setIsLogged(true);
-            context.setUsername(result.username);
-            context.setBestScore(result.bestScore);
+          if (result.status === 200) {
+            localStorage.setItem('userId', result.data.userId);
+            localStorage.setItem('token', result.data.token);
+            context.setUsername(result.data.username);
+            context.setBestScore(result.data.bestScore);
             setIsLoginModalOpened(false);
+            context.setIsLogged(true);
           } else {
             throw new Error(result.response.data.message);
           }

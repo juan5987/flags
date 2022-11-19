@@ -119,7 +119,7 @@ exports.login = (req, res, next) => {
 
   try {
     dataMapper.getUserByEmail(email, (error, result) => {
-      const user = result.rows[0];
+      console.log(user);
       if (error) {
         console.log(error);
         return res.status(500).json({
@@ -129,13 +129,13 @@ exports.login = (req, res, next) => {
         if (!user) {
           return res
             .status(401)
-            .json({ message: 'Email ou mot de passe incorrect.' });
+            .json({ message: 'Email ou mot de passe incorrect 1.' });
         } else {
-          bcrypt.compare(password, user.password).then((valid) => {
-            if (!valid) {
+          bcrypt.compare(password, user.password).then((result) => {
+            if (!result) {
               return res
                 .status(401)
-                .json({ message: 'Email ou mot de passe incorrect.' });
+                .json({ message: 'Email ou mot de passe incorrect 2.' });
             } else {
               console.log(`Utilisateur ${user.username} connecté.`);
               res.status(200).json({
