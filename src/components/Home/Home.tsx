@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Login from '../Login/Login';
 import { UserContext } from '../App/App';
@@ -22,26 +23,31 @@ const Home = () => {
       setFormError('');
 
       const requestOptions: any = {
-        method: 'POST',
+        method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        data: {
           email,
           password,
-        }),
+        },
+        url: `${context.apiUrl}/auth/login`,
       };
 
-      fetch('http://localhost:3001/auth/login', requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          console.log(result);
-          localStorage.setItem('userId', result.userId);
-          localStorage.setItem('token', result.token);
-          context.setIsLogged(true);
-          context.setUsername(result.username);
-          context.setBestScore(result.bestScore);
-          setIsLoginModalOpened(false);
+      axios(requestOptions)
+        .then((result: any) => {
+          if (result.response.status === 200) {
+            localStorage.setItem('userId', result.userId);
+            localStorage.setItem('token', result.token);
+            context.setIsLogged(true);
+            context.setUsername(result.username);
+            context.setBestScore(result.bestScore);
+            setIsLoginModalOpened(false);
+          } else {
+            throw new Error(result.response.data.message);
+          }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          setFormError(error.response.data.message);
+        });
     }
   };
 

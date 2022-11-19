@@ -13,6 +13,8 @@ const App = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [username, setUsername] = useState('');
   const [bestScore, setBestScore] = useState(0);
+  const apiUrl = 'http://api.worldflags.fr';
+
   const contextValue: any = {
     isLogged,
     setIsLogged,
@@ -20,6 +22,7 @@ const App = () => {
     setUsername,
     bestScore,
     setBestScore,
+    apiUrl,
   };
   return (
     <div className='app'>

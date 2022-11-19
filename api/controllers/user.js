@@ -18,7 +18,7 @@ exports.signup = (req, res) => {
     const password = sanitizeHtml(data.password);
     const passwordConfirm = sanitizeHtml(data.passwordConfirm);
     const username = sanitizeHtml(data.username);
-    const bestScore = sanitizeHtml(data.bestScore);
+    const bestScore = parseInt(sanitizeHtml(data.bestScore));
 
     if (email !== emailConfirm) {
       return res
@@ -37,7 +37,7 @@ exports.signup = (req, res) => {
         if (error) {
           console.log(error);
           return res.status(500).json({
-            message: 'Erreur de communication avec la base de données.',
+            message: 'Erreur de communication avec la base de données 1.',
           });
         } else {
           if (result.rows[0]) {
@@ -50,7 +50,8 @@ exports.signup = (req, res) => {
                 if (error) {
                   console.log(error);
                   return res.status(500).json({
-                    message: 'Erreur de communication avec la base de données.',
+                    message:
+                      'Erreur de communication avec la base de données 2.',
                   });
                 } else {
                   if (result.rows[0]) {
@@ -70,7 +71,7 @@ exports.signup = (req, res) => {
                               console.log(error);
                               return res.status(500).json({
                                 message:
-                                  'Erreur de communication avec la base de données.',
+                                  'Erreur de communication avec la base de données 3.',
                               });
                             } else {
                               console.log('utilisateur créé');
@@ -84,7 +85,7 @@ exports.signup = (req, res) => {
                     } catch (error) {
                       console.log(error);
                       return res.status(500).json({
-                        message: 'Erreur de communication avec le serveur.',
+                        message: 'Erreur de communication avec le serveur 1.',
                       });
                     }
                   }
@@ -92,9 +93,9 @@ exports.signup = (req, res) => {
               });
             } catch (error) {
               console.log(error);
-              return res
-                .status(500)
-                .json({ message: 'Erreur de communication avec le serveur' });
+              return res.status(500).json({
+                message: 'Erreur de communication avec le serveur 2.',
+              });
             }
           }
         }
@@ -103,7 +104,7 @@ exports.signup = (req, res) => {
       console.log(error);
       return res
         .status(500)
-        .json({ message: 'Erreur de communication avec le serveur' });
+        .json({ message: 'Erreur de communication avec le serveur 3.' });
     }
   } else {
     return res
@@ -134,7 +135,7 @@ exports.login = (req, res, next) => {
             if (!valid) {
               return res
                 .status(401)
-                .json({ message: 'Email ou mot de passe incorrect 2.' });
+                .json({ message: 'Email ou mot de passe incorrect.' });
             } else {
               console.log(`Utilisateur ${user.username} connecté.`);
               res.status(200).json({

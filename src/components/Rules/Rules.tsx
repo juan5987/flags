@@ -21,7 +21,8 @@ const Rules = () => {
             attention,{' '}
             <b>
               si vous ne trouvez pas la réponse en passant ou en vous trompant,
-              vous perdez 1 points
+              vous perdez 1 points en sachant que vous ne pouvez pas avoir un
+              score négatif.
             </b>
             .
           </span>

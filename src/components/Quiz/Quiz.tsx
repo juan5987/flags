@@ -59,7 +59,9 @@ const Quiz = () => {
 
   const handlePass = () => {
     setResult(false);
-    setScore((score) => score - 1);
+    if (score > 0) {
+      setScore((score) => score - 1);
+    }
     setShowResult(true);
   };
 

@@ -33,7 +33,7 @@ const Login = ({ displayFunction, submitFunction, error }: any) => {
             autoComplete='current-password'
           />
         </div>
-        <span className='login__form__error'>{error}</span>
+        {error && <span className='login__form__error'>{error}</span>}
         <button className='login__form__submit'>Valider</button>
       </form>
     </div>
