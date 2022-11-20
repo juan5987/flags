@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../App/App';
+import eye from '../../static/images/eye.svg';
+import eyeOff from '../../static/images/eye-off.svg';
 import './signup.sass';
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const context: any = useContext(UserContext);
+  const [sucessMsg, setSucessMsg] = useState(false);
   const [formValues, setFormValues] = useState({
     username: '',
     email: '',
-    email_confirm: '',
+    emailConfirm: '',
     password: '',
-    password_confirm: '',
+    passwordConfirm: '',
   });
 
   const [error, setError] = useState({
     username: '',
     email: '',
-    email_confirm: '',
+    emailConfirm: '',
     password: '',
-    password_confirm: '',
+    passwordConfirm: '',
     global: '',
   });
 
@@ -28,9 +34,9 @@ const Signup = () => {
     if (
       !formValues.username ||
       !formValues.email ||
-      !formValues.email_confirm ||
+      !formValues.emailConfirm ||
       !formValues.password ||
-      !formValues.password_confirm
+      !formValues.passwordConfirm
     ) {
       setError({
         ...error,
@@ -45,29 +51,59 @@ const Signup = () => {
         global: '',
         username: "Le nom d'utilisateur doit contenir entre 3 et 18 caractères",
       });
-    } else if (formValues.email !== formValues.email_confirm) {
+    } else if (formValues.email !== formValues.emailConfirm) {
       setError({
         ...error,
         global: '',
         email: 'Les adresses email ne correspondent pas',
-        email_confirm: 'Les adresses email ne correspondent pas',
+        emailConfirm: 'Les adresses email ne correspondent pas',
       });
-    } else if (formValues.password !== formValues.password_confirm) {
+    } else if (formValues.password !== formValues.passwordConfirm) {
       setError({
         ...error,
         global: '',
         password: 'Les mots de passe ne correspondent pas',
-        password_confirm: 'Les mots de passe ne correspondent pas',
+        passwordConfirm: 'Les mots de passe ne correspondent pas',
       });
     } else {
       setError({
         username: '',
         email: '',
-        email_confirm: '',
+        emailConfirm: '',
         password: '',
-        password_confirm: '',
+        passwordConfirm: '',
         global: '',
       });
+      const requestOptions: any = {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        data: JSON.stringify({
+          username: formValues.username,
+          email: formValues.email,
+          emailConfirm: formValues.emailConfirm,
+          password: formValues.password,
+          passwordConfirm: formValues.passwordConfirm,
+        }),
+        url: `${context.apiUrl}/auth/signup`,
+      };
+      axios(requestOptions)
+        .then((result: any) => {
+          if (result.status === 201) {
+            setSucessMsg(true);
+            context.setUsername(formValues.username);
+            context.setIsLogged(true);
+            setTimeout(() => {
+              setSucessMsg(false);
+              navigate('/');
+            }, 1000);
+          }
+        })
+        .catch((error) => {
+          setError({
+            ...error,
+            global: error.response.data.message,
+          });
+        });
     }
   };
 
@@ -76,6 +112,10 @@ const Signup = () => {
       ...formValues,
       [e.target.id]: e.target.value,
     });
+  };
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -124,21 +164,21 @@ const Signup = () => {
         <div className='signup__form__element'>
           <label
             className='signup__form__element__label'
-            htmlFor='email_confirm'
+            htmlFor='emailConfirm'
           >
             Confirmation de l'email
           </label>
           <input
             type='email'
             className='signup__form__element__input'
-            id='email_confirm'
+            id='emailConfirm'
             onChange={handleChange}
-            value={formValues.email_confirm}
+            value={formValues.emailConfirm}
             autoComplete='email'
           />
-          {error.email_confirm && (
+          {error.emailConfirm && (
             <span className='signup__form__element__error'>
-              {error.email_confirm}
+              {error.emailConfirm}
             </span>
           )}
         </div>
@@ -148,12 +188,27 @@ const Signup = () => {
           </label>
           <input
             className='signup__form__element__input'
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             id='password'
             onChange={handleChange}
             value={formValues.password}
             autoComplete='new-password'
           />
+          {showPassword ? (
+            <div
+              className='signup__form__element__eye'
+              onClick={togglePassword}
+            >
+              <img src={eye} alt='oeil' />
+            </div>
+          ) : (
+            <div
+              className='signup__form__element__eye'
+              onClick={togglePassword}
+            >
+              <img src={eyeOff} alt='oeil' />
+            </div>
+          )}
           {error.password && (
             <span className='signup__form__element__error'>
               {error.password}
@@ -163,21 +218,36 @@ const Signup = () => {
         <div className='signup__form__element'>
           <label
             className='signup__form__element__label'
-            htmlFor='password_confirm'
+            htmlFor='passwordConfirm'
           >
             Confirmation du mot de passe
           </label>
           <input
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             className='signup__form__element__input'
-            id='password_confirm'
+            id='passwordConfirm'
             onChange={handleChange}
-            value={formValues.password_confirm}
+            value={formValues.passwordConfirm}
             autoComplete='new-password'
           />
-          {error.password_confirm && (
+          {showPassword ? (
+            <div
+              className='signup__form__element__eye'
+              onClick={togglePassword}
+            >
+              <img src={eye} alt='oeil' />
+            </div>
+          ) : (
+            <div
+              className='signup__form__element__eye'
+              onClick={togglePassword}
+            >
+              <img src={eyeOff} alt='oeil' />
+            </div>
+          )}
+          {error.passwordConfirm && (
             <span className='signup__form__element__error'>
-              {error.password_confirm}
+              {error.passwordConfirm}
             </span>
           )}
         </div>
@@ -187,6 +257,11 @@ const Signup = () => {
         <button className='signup__form__submit' type='submit'>
           Valider
         </button>
+        {sucessMsg && (
+          <span className='signup__form__success'>
+            inscription validé, veuillez patienter vous allez être redirigé.
+          </span>
+        )}
       </form>
       <Link to='/' className='signup__home'>
         Retour au menu principal

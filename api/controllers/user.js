@@ -37,12 +37,12 @@ exports.signup = (req, res) => {
         if (error) {
           console.log(error);
           return res.status(500).json({
-            message: 'Erreur de communication avec la base de données 1.',
+            message: 'Erreur de communication avec la base de données.',
           });
         } else {
           if (result.rows[0]) {
             return res
-              .status(400)
+              .status(409)
               .json({ message: 'Ce pseudo est déjà utilisé.' });
           } else {
             try {
@@ -50,12 +50,11 @@ exports.signup = (req, res) => {
                 if (error) {
                   console.log(error);
                   return res.status(500).json({
-                    message:
-                      'Erreur de communication avec la base de données 2.',
+                    message: 'Erreur de communication avec la base de données.',
                   });
                 } else {
                   if (result.rows[0]) {
-                    res.status(400).json({
+                    return res.status(409).json({
                       message: 'Cette adresse email est déjà utilisée.',
                     });
                   } else {
@@ -71,11 +70,11 @@ exports.signup = (req, res) => {
                               console.log(error);
                               return res.status(500).json({
                                 message:
-                                  'Erreur de communication avec la base de données 3.',
+                                  'Erreur de communication avec la base de données.',
                               });
                             } else {
                               console.log('utilisateur créé');
-                              res
+                              return res
                                 .status(201)
                                 .json({ message: 'Utilisateur créé !' });
                             }
@@ -85,7 +84,7 @@ exports.signup = (req, res) => {
                     } catch (error) {
                       console.log(error);
                       return res.status(500).json({
-                        message: 'Erreur de communication avec le serveur 1.',
+                        message: 'Erreur de communication avec le serveur.',
                       });
                     }
                   }
@@ -94,7 +93,7 @@ exports.signup = (req, res) => {
             } catch (error) {
               console.log(error);
               return res.status(500).json({
-                message: 'Erreur de communication avec le serveur 2.',
+                message: 'Erreur de communication avec le serveur.',
               });
             }
           }
@@ -104,7 +103,7 @@ exports.signup = (req, res) => {
       console.log(error);
       return res
         .status(500)
-        .json({ message: 'Erreur de communication avec le serveur 3.' });
+        .json({ message: 'Erreur de communication avec le serveur.' });
     }
   } else {
     return res
@@ -113,13 +112,13 @@ exports.signup = (req, res) => {
   }
 };
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
   const email = sanitizeHtml(req.body.email);
   const password = sanitizeHtml(req.body.password);
 
   try {
     dataMapper.getUserByEmail(email, (error, result) => {
-      console.log(user);
+      let user = result.rows[0];
       if (error) {
         console.log(error);
         return res.status(500).json({
@@ -129,13 +128,13 @@ exports.login = (req, res, next) => {
         if (!user) {
           return res
             .status(401)
-            .json({ message: 'Email ou mot de passe incorrect 1.' });
+            .json({ message: 'Email ou mot de passe incorrect.' });
         } else {
           bcrypt.compare(password, user.password).then((result) => {
             if (!result) {
               return res
                 .status(401)
-                .json({ message: 'Email ou mot de passe incorrect 2.' });
+                .json({ message: 'Email ou mot de passe incorrect.' });
             } else {
               console.log(`Utilisateur ${user.username} connecté.`);
               res.status(200).json({

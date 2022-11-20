@@ -7,7 +7,6 @@ import './home.sass';
 
 const Home = () => {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
-  const [isSignupModalOpened, setIsSignupModalOpened] = useState(false);
   const [formError, setFormError] = useState('');
   const context: any = useContext(UserContext);
 
@@ -41,8 +40,6 @@ const Home = () => {
             context.setBestScore(result.data.bestScore);
             setIsLoginModalOpened(false);
             context.setIsLogged(true);
-          } else {
-            throw new Error(result.response.data.message);
           }
         })
         .catch((error) => {
