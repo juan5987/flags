@@ -19,7 +19,7 @@ const Quiz = () => {
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(false);
   const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(6000);
+  const [timer, setTimer] = useState(60);
   const [intervalId, setIntervalId] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +31,7 @@ const Quiz = () => {
   useEffect(() => {
     if (!isLoading) {
       const newIntervalId: any = setInterval(() => {
-        setTimer((timer) => timer - 1);
+        setTimer((timer) => timer - 0.01);
       }, 10);
       setIntervalId(newIntervalId);
       return () => clearInterval(newIntervalId);
@@ -39,7 +39,7 @@ const Quiz = () => {
   }, [isLoading]);
 
   useEffect(() => {
-    if (timer === 0) {
+    if (Math.round(timer) === 0) {
       clearInterval(intervalId);
       setGameOver(true);
       setPreviousSolution([]);
@@ -141,18 +141,18 @@ const Quiz = () => {
       allCountries[randomNumber].translations.fr,
     ]);
     const newIntervalId: any = setInterval(() => {
-      setTimer((timer) => timer - 1);
+      setTimer((timer) => timer - 0.01);
     }, 10);
     setIntervalId(newIntervalId);
   };
 
   const handlePlayAgain = () => {
-    setTimer(60000);
+    setTimer(60);
     setGameOver(false);
     setScore(0);
     handleNextFlag();
     const newIntervalId: any = setInterval(() => {
-      setTimer((timer) => timer - 1);
+      setTimer((timer) => timer - 0.01);
     }, 1000);
     setIntervalId(newIntervalId);
   };
@@ -206,9 +206,7 @@ const Quiz = () => {
             <div className='quiz__mobile__timer'>
               <h2 className='quiz__mobile__timer__label'>Temps restant</h2>
               <span className='quiz__mobile__timer__value'>
-                {timer > 999
-                  ? String(timer).slice(0, 2)
-                  : String(timer).slice(0, 1)}
+                {Math.round(timer)}
               </span>
             </div>
           </div>
@@ -231,11 +229,7 @@ const Quiz = () => {
             </div>
             <div className='quiz__top__right'>
               <h2 className='quiz__top_title'>Temps restant</h2>
-              <span className='quiz__top__score'>
-                {timer > 999
-                  ? String(timer).slice(0, 2)
-                  : String(timer).slice(0, 1)}
-              </span>
+              <span className='quiz__top__score'>{Math.round(timer)}</span>
             </div>
           </div>
 
