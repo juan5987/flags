@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { getRandomNumber } from '../../utils/randomInt';
 import { normalizeString } from '../../utils/normalizeString';
-import Header from '../Header/Header';
+import { UserContext } from '../App/App';
 import Footer from '../Footer/Footer';
 import check from '../../static/images/check.svg';
+import Login from '../Login/Login';
 import chevron_right from '../../static/images/chevron-right.svg';
 import './quiz.sass';
 
@@ -22,6 +23,9 @@ const Quiz = () => {
   const [intervalId, setIntervalId] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [notLoggedModalOpened, setNotLoggedModalOpened] = useState(true);
+  const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
+  const context: any = useContext(UserContext);
 
   useEffect(() => {
     if (!isLoading) {
@@ -41,20 +45,44 @@ const Quiz = () => {
   }, [timer]);
 
   useEffect(() => {
+    if (!notLoggedModalOpened && !isLoginModalOpened) {
+      axios('https://restcountries.com/v2/all')
+        .then((result) => {
+          let actualCountries = result.data.filter(
+            (country: any) => country.independent === true
+          );
+          setAllCountries(actualCountries);
+          const randomInt = getRandomNumber(1, 202);
+          setCurrentFlag(actualCountries[randomInt].flag);
+          setSolution(actualCountries[randomInt].translations.fr);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [notLoggedModalOpened, isLoginModalOpened]);
+
+  useEffect(() => {
     setIsLoading(true);
-    axios('https://restcountries.com/v2/all')
-      .then((result) => {
-        let actualCountries = result.data.filter(
-          (country: any) => country.independent === true
-        );
-        setAllCountries(actualCountries);
-        const randomInt = getRandomNumber(1, 202);
-        setCurrentFlag(actualCountries[randomInt].flag);
-        setSolution(actualCountries[randomInt].translations.fr);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+
+    if (context.isLogged) {
+      setNotLoggedModalOpened(false);
+      axios('https://restcountries.com/v2/all')
+        .then((result) => {
+          let actualCountries = result.data.filter(
+            (country: any) => country.independent === true
+          );
+          setAllCountries(actualCountries);
+          const randomInt = getRandomNumber(1, 202);
+          setCurrentFlag(actualCountries[randomInt].flag);
+          setSolution(actualCountries[randomInt].translations.fr);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      setNotLoggedModalOpened(true);
+    }
   }, []);
 
   const handlePass = () => {
@@ -99,9 +127,43 @@ const Quiz = () => {
     setIntervalId(newIntervalId);
   };
 
+  const handleLogin = () => {
+    setIsLoginModalOpened(true);
+    setNotLoggedModalOpened(false);
+  };
+
   return (
     <div className='quiz'>
       <div className='quiz__background'></div>
+      {isLoginModalOpened && <Login displayFunction={setIsLoginModalOpened} />}
+      {notLoggedModalOpened && (
+        <div className='quiz__modal'>
+          <div className='quiz__modal__content'>
+            <h2 className='quiz__modal__content__title'>Avertissement</h2>
+            <p className='quiz__modal__content__paragraph'>
+              Vous jouez en tant qu'invité. Votre score ne sera pas sauvegardé.
+            </p>
+            <p className='quiz__modal__content__paragraph'>
+              Pour sauvegarder votre score est apparaitre dans le classement,
+              vous devez vous authentifié.
+            </p>
+            <div className='quiz__modal__content__buttons'>
+              <button
+                className='quiz__modal__content__buttons__button'
+                onClick={handleLogin}
+              >
+                Connexion
+              </button>
+              <button
+                className='quiz__modal__content__buttons__button'
+                onClick={() => setNotLoggedModalOpened(false)}
+              >
+                Continuer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {isLoading ? (
         <h2 className='quiz__top__loading'>Chargement de la partie...</h2>
       ) : (

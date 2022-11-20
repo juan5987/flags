@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 import Login from '../Login/Login';
 import { UserContext } from '../App/App';
@@ -7,46 +7,7 @@ import './home.sass';
 
 const Home = () => {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
-  const [formError, setFormError] = useState('');
   const context: any = useContext(UserContext);
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    const email = e.target[0].value;
-    const password = e.target[1].value;
-
-    if (!email || !password) {
-      setFormError('Tous les champs doivent être renseignés.');
-    } else {
-      setFormError('');
-
-      const requestOptions: any = {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        data: JSON.stringify({
-          email,
-          password,
-        }),
-        url: `${context.apiUrl}/auth/login`,
-      };
-
-      axios(requestOptions)
-        .then((result: any) => {
-          if (result.status === 200) {
-            localStorage.setItem('userId', result.data.userId);
-            localStorage.setItem('token', result.data.token);
-            context.setUsername(result.data.username);
-            context.setBestScore(result.data.bestScore);
-            setIsLoginModalOpened(false);
-            context.setIsLogged(true);
-          }
-        })
-        .catch((error) => {
-          setFormError(error.response.data.message);
-        });
-    }
-  };
 
   const handleLogout = () => {
     localStorage.removeItem('userId');
@@ -59,13 +20,7 @@ const Home = () => {
   return (
     <div className='home'>
       <div className='home__background' />
-      {isLoginModalOpened && (
-        <Login
-          displayFunction={setIsLoginModalOpened}
-          submitFunction={handleSubmit}
-          error={formError}
-        />
-      )}
+      {isLoginModalOpened && <Login displayFunction={setIsLoginModalOpened} />}
 
       <header className='home__header'>
         <h1 className='home__header__title'>World Flags</h1>

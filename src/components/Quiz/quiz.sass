@@ -11,6 +11,61 @@
     justify-content: space-around
     align-items: center
 
+    &__modal
+        position: fixed
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100vw
+        min-height: 100vh
+        font-size: 2rem
+        color: white
+        z-index: 2
+        background-color: rgba(0,0,0,.8)
+
+        &__content
+            display: flex
+            flex-direction: column
+            background-color: #0f0f0f
+            padding: 2rem
+
+            &__title
+                font-size: 2rem
+                text-align: center
+                margin-bottom: 2rem
+
+            &__paragraph
+                text-align: center
+                font-size: 1.3rem
+                margin-bottom: 1rem
+
+            &__buttons
+                display: flex
+                justify-content: center
+
+                &__button
+                    padding: .5rem 1.5rem
+                    font-size: 1.5rem
+                    background-color: orange
+                    color: white
+                    margin-right: 1rem
+                    border-radius: 15px
+                    border: 5px solid orange
+
+                    &:hover
+                        cursor: pointer
+                        border: 5px solid white
+
+                &__button:last-child
+                    margin-left: 1rem
+                    background-color: white
+                    color: orange
+                    border: 5px solid white
+
+                    &:hover
+                        cursor: pointer
+                        border: 5px solid orange
+
     &__background
         position: fixed
         left: 0
