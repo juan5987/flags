@@ -12,7 +12,7 @@ const dataMapper = {
     } else {
       client.query(
         `INSERT INTO "user" ("username", "email", "password") VALUES
-          ($1, $2, $3)`,
+          ($1, $2, $3) RETURNING "id", "username", "best_score"`,
         [username, email, password],
         callback
       );
@@ -27,6 +27,19 @@ const dataMapper = {
   },
   getUserByEmail: (email, callback) => {
     client.query(`SELECT * FROM "user" WHERE email = $1`, [email], callback);
+  },
+  updateScore: (newScore, userId, callback) => {
+    client.query(
+      `UPDATE "user" SET "best_score" = $1 WHERE "id" = $2`,
+      [newScore, userId],
+      callback
+    );
+  },
+  getRank: (callback) => {
+    client.query(
+      `SELECT "username", "best_score" FROM "user" WHERE "best_score" >= 0 ORDER BY "best_score" DESC`,
+      callback
+    );
   },
 };
 

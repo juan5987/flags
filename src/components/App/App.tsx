@@ -12,8 +12,10 @@ export const UserContext: any = createContext(null);
 const App = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState('');
   const [bestScore, setBestScore] = useState(0);
   const apiUrl = 'http://api.worldflags.fr';
+  // const apiUrl = 'http://localhost:3001';
 
   const contextValue: any = {
     isLogged,
@@ -23,6 +25,8 @@ const App = () => {
     bestScore,
     setBestScore,
     apiUrl,
+    userId,
+    setUserId,
   };
   return (
     <div className='app'>

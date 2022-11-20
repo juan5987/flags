@@ -25,6 +25,7 @@ const Quiz = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [notLoggedModalOpened, setNotLoggedModalOpened] = useState(true);
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
+  const [previousSolution, setPreviousSolution]: any = useState([]);
   const context: any = useContext(UserContext);
 
   useEffect(() => {
@@ -41,6 +42,27 @@ const Quiz = () => {
     if (timer === 0) {
       clearInterval(intervalId);
       setGameOver(true);
+      setPreviousSolution([]);
+      if (context.bestScore < score) {
+        if (context.isLogged) {
+          const requestOptions: any = {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            data: JSON.stringify({
+              newScore: score,
+              userId: context.userId,
+            }),
+            url: `${context.apiUrl}/updatescore`,
+          };
+          axios(requestOptions)
+            .then((result: any) => {
+              context.setBestScore(score);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      }
     }
   }, [timer]);
 
@@ -55,6 +77,10 @@ const Quiz = () => {
           const randomInt = getRandomNumber(1, 202);
           setCurrentFlag(actualCountries[randomInt].flag);
           setSolution(actualCountries[randomInt].translations.fr);
+          setPreviousSolution([
+            ...previousSolution,
+            actualCountries[randomInt].translations.fr,
+          ]);
         })
         .finally(() => {
           setIsLoading(false);
@@ -64,22 +90,8 @@ const Quiz = () => {
 
   useEffect(() => {
     setIsLoading(true);
-
     if (context.isLogged) {
       setNotLoggedModalOpened(false);
-      axios('https://restcountries.com/v2/all')
-        .then((result) => {
-          let actualCountries = result.data.filter(
-            (country: any) => country.independent === true
-          );
-          setAllCountries(actualCountries);
-          const randomInt = getRandomNumber(1, 202);
-          setCurrentFlag(actualCountries[randomInt].flag);
-          setSolution(actualCountries[randomInt].translations.fr);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
     } else {
       setNotLoggedModalOpened(true);
     }
@@ -100,7 +112,9 @@ const Quiz = () => {
         setResult(true);
         setScore((score) => score + 3);
       } else {
-        setScore((score) => score - 1);
+        if (score > 0) {
+          setScore((score) => score - 1);
+        }
         setResult(false);
       }
       setShowResult(true);
@@ -110,10 +124,19 @@ const Quiz = () => {
 
   const handleNextFlag = () => {
     setShowResult(false);
-    const randomNumber = getRandomNumber(1, 202);
+    let randomNumber = getRandomNumber(1, 202);
+    previousSolution.forEach((previousSolution: any) => {
+      while (previousSolution === allCountries[randomNumber].translations.fr) {
+        randomNumber = getRandomNumber(1, 202);
+      }
+    });
     setCurrentFlag(allCountries[randomNumber].flag);
     setSolution(allCountries[randomNumber].translations.fr);
     setAnswer('');
+    setPreviousSolution([
+      ...previousSolution,
+      allCountries[randomNumber].translations.fr,
+    ]);
   };
 
   const handlePlayAgain = () => {
@@ -215,10 +238,16 @@ const Quiz = () => {
               />
             }
             <div className='quiz__buttons'>
-              <button className='quiz__buttons__button' onClick={handlePass}>
+              <button
+                className='quiz__buttons__button'
+                type='button'
+                onClick={handlePass}
+              >
                 Passer
               </button>
-              <button className='quiz__buttons__button'>Valider</button>
+              <button className='quiz__buttons__button' type='submit'>
+                Valider
+              </button>
             </div>
           </form>
           {showResult && (

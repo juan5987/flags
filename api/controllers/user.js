@@ -74,9 +74,7 @@ exports.signup = (req, res) => {
                               });
                             } else {
                               console.log('utilisateur créé');
-                              return res
-                                .status(201)
-                                .json({ message: 'Utilisateur créé !' });
+                              return res.status(201).json(result.rows[0]);
                             }
                           }
                         );

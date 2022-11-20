@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const userRoutes = require('./routes/user');
+const scoreRoutes = require('./routes/score');
 const app = express();
 
 app.use(express.json());
@@ -22,5 +23,6 @@ app.get('/', (req, res) => {
   res.send('WorldFlags API v1.0');
 });
 app.use('/auth', userRoutes);
+app.use(scoreRoutes);
 
 module.exports = app;

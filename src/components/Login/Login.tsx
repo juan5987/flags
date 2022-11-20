@@ -34,6 +34,7 @@ const Login = ({ displayFunction }: any) => {
             localStorage.setItem('userId', result.data.userId);
             localStorage.setItem('token', result.data.token);
             context.setUsername(result.data.username);
+            context.setUserId(result.data.userId);
             context.setBestScore(result.data.bestScore);
             displayFunction(false);
             context.setIsLogged(true);

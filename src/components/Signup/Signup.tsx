@@ -89,8 +89,10 @@ const Signup = () => {
       axios(requestOptions)
         .then((result: any) => {
           if (result.status === 201) {
+            console.log(result);
             setSucessMsg(true);
-            context.setUsername(formValues.username);
+            context.setUsername(result.data.username);
+            context.setUserId(result.data.id);
             context.setIsLogged(true);
             setTimeout(() => {
               setSucessMsg(false);
@@ -99,6 +101,7 @@ const Signup = () => {
           }
         })
         .catch((error) => {
+          console.log(error);
           setError({
             ...error,
             global: error.response.data.message,

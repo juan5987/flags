@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 import Login from '../Login/Login';
@@ -14,6 +14,8 @@ const Home = () => {
     localStorage.removeItem('token');
     context.setIsLogged(false);
     context.setUsername('');
+    context.setUserId(0);
+    context.setBestScore(0);
     context.setBestScore(0);
   };
 
@@ -67,12 +69,14 @@ const Home = () => {
             Connexion
           </button>
         )}
-        <Link
-          to='/signup'
-          className='home__menu__button home__menu__button--signup'
-        >
-          Inscription
-        </Link>
+        {!context.isLogged && (
+          <Link
+            to='/signup'
+            className='home__menu__button home__menu__button--signup'
+          >
+            Inscription
+          </Link>
+        )}
       </div>
     </div>
   );
