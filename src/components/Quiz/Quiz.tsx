@@ -19,7 +19,7 @@ const Quiz = () => {
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(false);
   const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(90);
+  const [timer, setTimer] = useState(6000);
   const [intervalId, setIntervalId] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +32,7 @@ const Quiz = () => {
     if (!isLoading) {
       const newIntervalId: any = setInterval(() => {
         setTimer((timer) => timer - 1);
-      }, 1000);
+      }, 10);
       setIntervalId(newIntervalId);
       return () => clearInterval(newIntervalId);
     }
@@ -103,6 +103,7 @@ const Quiz = () => {
       setScore((score) => score - 1);
     }
     setShowResult(true);
+    clearInterval(intervalId);
   };
 
   const handleSubmit = (e: any) => {
@@ -111,15 +112,17 @@ const Quiz = () => {
       if (normalizeString(answer) === normalizeString(solution)) {
         setResult(true);
         setScore((score) => score + 3);
+        clearInterval(intervalId);
       } else {
         if (score > 0) {
           setScore((score) => score - 1);
         }
+        clearInterval(intervalId);
         setResult(false);
       }
       setShowResult(true);
     }
-    e.target[0].blur();
+    e.target.blur();
   };
 
   const handleNextFlag = () => {
@@ -137,10 +140,14 @@ const Quiz = () => {
       ...previousSolution,
       allCountries[randomNumber].translations.fr,
     ]);
+    const newIntervalId: any = setInterval(() => {
+      setTimer((timer) => timer - 1);
+    }, 10);
+    setIntervalId(newIntervalId);
   };
 
   const handlePlayAgain = () => {
-    setTimer(90);
+    setTimer(60000);
     setGameOver(false);
     setScore(0);
     handleNextFlag();
@@ -198,7 +205,11 @@ const Quiz = () => {
             </div>
             <div className='quiz__mobile__timer'>
               <h2 className='quiz__mobile__timer__label'>Temps restant</h2>
-              <span className='quiz__mobile__timer__value'>{timer}</span>
+              <span className='quiz__mobile__timer__value'>
+                {timer > 999
+                  ? String(timer).slice(0, 2)
+                  : String(timer).slice(0, 1)}
+              </span>
             </div>
           </div>
           <div className='quiz__top'>
@@ -220,7 +231,11 @@ const Quiz = () => {
             </div>
             <div className='quiz__top__right'>
               <h2 className='quiz__top_title'>Temps restant</h2>
-              <span className='quiz__top__score'>{timer}</span>
+              <span className='quiz__top__score'>
+                {timer > 999
+                  ? String(timer).slice(0, 2)
+                  : String(timer).slice(0, 1)}
+              </span>
             </div>
           </div>
 
@@ -238,16 +253,10 @@ const Quiz = () => {
               />
             }
             <div className='quiz__buttons'>
-              <button
-                className='quiz__buttons__button'
-                type='button'
-                onClick={handlePass}
-              >
+              <button className='quiz__buttons__button' onClick={handlePass}>
                 Passer
               </button>
-              <button className='quiz__buttons__button' type='submit'>
-                Valider
-              </button>
+              <button className='quiz__buttons__button'>Valider</button>
             </div>
           </form>
           {showResult && (
