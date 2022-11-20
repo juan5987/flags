@@ -144,8 +144,8 @@ const Quiz = () => {
               Vous jouez en tant qu'invité. Votre score ne sera pas sauvegardé.
             </p>
             <p className='quiz__modal__content__paragraph'>
-              Pour sauvegarder votre score est apparaitre dans le classement,
-              vous devez vous authentifié.
+              Pour sauvegarder votre score et apparaitre dans le classement,
+              vous devez vous authentifier.
             </p>
             <div className='quiz__modal__content__buttons'>
               <button
