@@ -34,6 +34,7 @@ const Quiz = () => {
         setTimer((timer) => timer - 0.01);
       }, 10);
       setIntervalId(newIntervalId);
+      inputRef.current.focus();
       return () => clearInterval(newIntervalId);
     }
   }, [isLoading]);
@@ -104,11 +105,13 @@ const Quiz = () => {
     }
     setShowResult(true);
     clearInterval(intervalId);
+    handleNextFlag();
+    inputRef.current.focus();
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (answer) {
+    if (answer && !gameOver) {
       if (normalizeString(answer) === normalizeString(solution)) {
         setResult(true);
         setScore((score) => score + 3);
@@ -120,13 +123,16 @@ const Quiz = () => {
         clearInterval(intervalId);
         setResult(false);
       }
+      handleNextFlag();
       setShowResult(true);
     }
-    e.target.blur();
+    inputRef.current.focus();
   };
 
   const handleNextFlag = () => {
-    setShowResult(false);
+    setTimeout(() => {
+      setShowResult(false);
+    }, 750);
     let randomNumber = getRandomNumber(1, 202);
     previousSolution.forEach((previousSolution: any) => {
       while (previousSolution === allCountries[randomNumber].translations.fr) {
@@ -148,14 +154,11 @@ const Quiz = () => {
   };
 
   const handlePlayAgain = () => {
-    setTimer(60);
     setGameOver(false);
     setScore(0);
+    setTimer(60);
     handleNextFlag();
-    const newIntervalId: any = setInterval(() => {
-      setTimer((timer) => timer - 0.01);
-    }, 1000);
-    setIntervalId(newIntervalId);
+    inputRef.current.focus();
   };
 
   const handleLogin = () => {
@@ -233,6 +236,18 @@ const Quiz = () => {
               <span className='quiz__top__score'>{Math.round(timer)}</span>
             </div>
           </div>
+          {showResult && (
+            <div className='quiz__result'>
+              {result ? (
+                <span className='quiz__result__good'>Bonne réponse</span>
+              ) : (
+                <span className='quiz__result__wrong'>
+                  Mauvaise réponse:{' '}
+                  {previousSolution[previousSolution.length - 2]}
+                </span>
+              )}
+            </div>
+          )}
 
           <form className='quiz__answer' onSubmit={handleSubmit}>
             {
@@ -248,54 +263,18 @@ const Quiz = () => {
               />
             }
             <div className='quiz__buttons'>
-              <button className='quiz__buttons__button' onClick={handlePass}>
+              <button
+                className='quiz__buttons__button'
+                onClick={handlePass}
+                type='button'
+              >
                 Passer
               </button>
-              <button className='quiz__buttons__button'>Valider</button>
+              <button className='quiz__buttons__button' type='submit'>
+                Valider
+              </button>
             </div>
           </form>
-          {showResult && (
-            <div className='quiz__result'>
-              <div className='quiz__result__content'>
-                {result && (
-                  <>
-                    <img
-                      className='quiz__result__content__check'
-                      src={check}
-                      alt='check logo'
-                    />
-                    <h3 className='quiz__result__content__correct'>
-                      Félicitations !
-                    </h3>
-                    <span className='quiz__result__content__text'>
-                      La réponse est:
-                    </span>
-                  </>
-                )}
-                {!result && (
-                  <>
-                    <div className='quiz__result__content__cross'>x</div>
-                    <h3 className='quiz__result__content__incorrect'>
-                      Dommage
-                    </h3>
-                    <span className='quiz__result__content__text'>
-                      La réponse était:
-                    </span>
-                  </>
-                )}
-                <span className='quiz__result__content__solution'>
-                  {solution}
-                </span>
-                <button
-                  className='quiz__result__content__next'
-                  onClick={handleNextFlag}
-                >
-                  Drapeau suivant
-                  <img src={chevron_right} alt='chevron' />
-                </button>
-              </div>
-            </div>
-          )}
           {gameOver && (
             <div className='quiz__gameover'>
               <div className='quiz__gameover__content'>
