@@ -15,7 +15,7 @@ const Rules = () => {
             1. Règles générales:
           </span>
           <span className='rules__list__element__content'>
-            Un quiz dure <b>90 secondes</b>, pendant ce temps, vous devez
+            Un quiz dure <b>60 secondes</b>, pendant ce temps, vous devez
             cumuler un maximum de points.{' '}
             <b>Pour chaque bonne réponse, vous gagnez 3 points</b>. Mais
             attention,{' '}

@@ -144,6 +144,7 @@ const Quiz = () => {
       setTimer((timer) => timer - 0.01);
     }, 10);
     setIntervalId(newIntervalId);
+    console.log(previousSolution);
   };
 
   const handlePlayAgain = () => {
