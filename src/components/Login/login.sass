@@ -13,14 +13,18 @@
     z-index: 2
 
     &__title
-        font-size: 2.5rem
-        color: orange
-        margin-bottom: 2rem
+        color: white
+        font-size: 2rem
         z-index: 1
-        border: 3px solid orange
-        padding: 1rem 0
+        background-color: #ff9f1c
+        padding: 0.5em 1em
+        border: 10px solid white
+        border-radius: 6rem
+        display: block
+        font-family: 'Bowlby One SC', cursive
+        text-shadow: 1px 1px 5px #000000
+        margin-bottom: 2rem
         text-align: center
-        width: 100%
 
     &__form
         display: flex
@@ -29,6 +33,7 @@
         padding: 2rem
         border-radius: 15px
         position: relative
+        background-color: #4e54c8
 
         &__element
             display: flex
@@ -37,28 +42,36 @@
             margin-bottom: 1rem
 
             &__label
-                color: orange
+                color: white
                 font-weight: bold
                 margin-bottom: .25rem
+                text-align: center
 
             &__input
-                font-size: 2rem
-                padding: .5rem
+                font-size: 1.5rem
+                font-weight: bold
+                padding: .5em 1em
                 width: 100%
-                color: black
+                color: #4e54c8
+                border-radius: 1em
+
+        &__loading
+            display: flex
+            justify-content: center
+            align-items: center
+            position: relative
+            width: min-content
+            margin: 1rem auto
+
+        &__loader
+            color: white
+            margin-bottom: 1rem
+            font-weight: bold
+            padding-left: calc(1rem + 40px)
+            white-space: nowrap
 
         &__submit
-            font-size: 2rem
-            padding: 1rem 2rem
-            background-color: orange
-            color: white
-            border: none
-            border-radius: 4px
-            cursor: pointer
             margin: 0 auto
-
-            &:hover
-                background-color: #f8be00
 
         &__close
             width: 60px
@@ -69,8 +82,8 @@
             border: 5px solid white
             border-radius: 50%
             position: absolute
-            top: 1rem
-            right: 1rem
+            top: -5rem
+            right: -5rem
 
             &:hover &__line1,  &:hover &__line2
                 background-color: orange
@@ -94,9 +107,9 @@
                 transform: rotate(-45deg)
                 position: relative
                 right: 13px
-        
+
         &__error
-            color: red
+            color: #ff4f4f
             font-size: 1.2rem
             font-weight: bold
             margin-bottom: 1rem
@@ -107,7 +120,16 @@
             font-weight: bold
             margin-bottom: 1rem
             text-decoration: underline
+            text-align: center
 
             &:hover
                 cursor: pointer
                 color: orange
+
+    @media all and (max-width: 1200px)
+        .login__form__close
+            position: absolute
+            top: -5rem
+            left: 42%
+
+        

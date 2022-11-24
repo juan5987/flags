@@ -7,6 +7,7 @@ import Signup from '../Signup/Signup';
 import Rank from '../Rank/Rank';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import ResetPassword from '../ResetPassword/ResetPassword';
+import Background from '../Background/Background';
 import './app.sass';
 
 export const UserContext: any = createContext(null);
@@ -32,7 +33,7 @@ const App = () => {
   };
   return (
     <div className='app'>
-      <div className='app__wrapper'>
+      <Background>
         <UserContext.Provider value={contextValue}>
           <Routes>
             <Route path='/' element={<Home />}></Route>
@@ -47,7 +48,7 @@ const App = () => {
             ></Route>
           </Routes>
         </UserContext.Provider>
-      </div>
+      </Background>
     </div>
   );
 };

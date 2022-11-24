@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import { getRandomNumber } from '../../utils/randomInt';
 import { normalizeString } from '../../utils/normalizeString';
 import { UserContext } from '../App/App';
-import Footer from '../Footer/Footer';
-import check from '../../static/images/check.svg';
 import Login from '../Login/Login';
-import chevron_right from '../../static/images/chevron-right.svg';
 import './quiz.sass';
 
 const Quiz = () => {
@@ -162,7 +159,6 @@ const Quiz = () => {
 
   return (
     <div className='quiz'>
-      <div className='quiz__background'></div>
       {isLoginModalOpened && <Login displayFunction={setIsLoginModalOpened} />}
       {notLoggedModalOpened && (
         <div className='quiz__modal'>
@@ -177,13 +173,13 @@ const Quiz = () => {
             </p>
             <div className='quiz__modal__content__buttons'>
               <button
-                className='quiz__modal__content__buttons__button'
+                className='quiz__modal__content__buttons__button button'
                 onClick={handleLogin}
               >
                 Connexion
               </button>
               <button
-                className='quiz__modal__content__buttons__button'
+                className='quiz__modal__content__buttons__button button'
                 onClick={() => setNotLoggedModalOpened(false)}
               >
                 Continuer
@@ -193,7 +189,9 @@ const Quiz = () => {
         </div>
       )}
       {isLoading ? (
-        <h2 className='quiz__top__loading'>Chargement de la partie...</h2>
+        <h2 className='quiz__top__loading'>
+          {!notLoggedModalOpened && 'Chargement de la partie...'}
+        </h2>
       ) : (
         <>
           <div className='quiz__mobile'>
@@ -201,8 +199,11 @@ const Quiz = () => {
               <h2 className='quiz__mobile__score__label'>Score</h2>
               <span className='quiz__mobile__score__value'>{score}</span>
             </div>
+            <Link className='quiz__mobile__quit button' to='/'>
+              Quitter
+            </Link>
             <div className='quiz__mobile__timer'>
-              <h2 className='quiz__mobile__timer__label'>Temps restant</h2>
+              <h2 className='quiz__mobile__timer__label'>Temps</h2>
               <span className='quiz__mobile__timer__value'>
                 {Math.round(timer)}
               </span>
@@ -214,34 +215,38 @@ const Quiz = () => {
               <span className='quiz__top__score'>{score}</span>
             </div>
             <div>
-              <Link className='quiz__quit' to='/'>
+              <Link className='quiz__quit button' to='/'>
                 quitter
               </Link>
-
+            </div>
+            <div className='quiz__top__middle'>
               <img
-                className='quiz__top__flag'
+                className='quiz__top__middle__flag'
                 src={currentFlag}
                 alt='drapeau'
-                height={300}
               />
             </div>
+
             <div className='quiz__top__right'>
               <h2 className='quiz__top_title'>Temps restant</h2>
               <span className='quiz__top__score'>{Math.round(timer)}</span>
             </div>
           </div>
-          {showResult && (
-            <div className='quiz__result'>
-              {result ? (
-                <span className='quiz__result__good'>Bonne réponse</span>
-              ) : (
-                <span className='quiz__result__wrong'>
-                  Mauvaise réponse:{' '}
-                  {previousSolution[previousSolution.length - 2]}
-                </span>
-              )}
-            </div>
-          )}
+          <div className='quiz__result'>
+            {showResult && (
+              <>
+                {' '}
+                {result ? (
+                  <span className='quiz__result__good'>Bonne réponse</span>
+                ) : (
+                  <span className='quiz__result__wrong'>
+                    Mauvaise réponse:{' '}
+                    {previousSolution[previousSolution.length - 2]}
+                  </span>
+                )}
+              </>
+            )}
+          </div>
 
           <form className='quiz__answer' onSubmit={handleSubmit}>
             {
@@ -249,22 +254,22 @@ const Quiz = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setAnswer(e.target.value)
                 }
-                className='quiz__answer__letter'
+                className='quiz__answer__input'
                 type='text'
                 ref={inputRef}
-                placeholder='Réponse'
+                placeholder='Votre réponse'
                 value={answer}
               />
             }
             <div className='quiz__buttons'>
               <button
-                className='quiz__buttons__button'
+                className='quiz__buttons__button button'
                 onClick={handlePass}
                 type='button'
               >
                 Passer
               </button>
-              <button className='quiz__buttons__button' type='submit'>
+              <button className='quiz__buttons__button button' type='submit'>
                 Valider
               </button>
             </div>
@@ -295,8 +300,6 @@ const Quiz = () => {
               </div>
             </div>
           )}
-
-          <Footer />
         </>
       )}
     </div>

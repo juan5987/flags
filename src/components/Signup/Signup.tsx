@@ -127,7 +127,6 @@ const Signup = () => {
         <div className='signup__form__close__line1'></div>
         <div className='signup__form__close__line2'></div>
       </Link>
-      <div className='signup__background'></div>
       <form className='signup__form' onSubmit={handleSubmit}>
         <h2 className='signup__title'>Inscription</h2>
         <div className='signup__form__element'>
@@ -257,7 +256,7 @@ const Signup = () => {
         {error.global && (
           <span className='signup__form__element__error'>{error.global}</span>
         )}
-        <button className='signup__form__submit' type='submit'>
+        <button className='signup__form__submit button' type='submit'>
           Valider
         </button>
         {sucessMsg && (

@@ -114,8 +114,6 @@ exports.login = (req, res) => {
   const email = sanitizeHtml(req.body.email);
   const password = sanitizeHtml(req.body.password);
 
-  res.setHeader('Access-Control-Allow-Origin', 'http://worldflags.fr');
-
   try {
     dataMapper.getUserByEmail(email, (error, result) => {
       let user = result.rows[0];

@@ -25,56 +25,62 @@ const Rank = () => {
 
   return (
     <div className='rank'>
-      <div className='rank__background'></div>
       {isLoading ? (
         <h2 className='rank__loading'> Récupération des scores... </h2>
       ) : (
         <>
-          <h2 className='rank__title'>Le classement de World Flags</h2>
-          <ul className='rank__list'>
-            <li className='rank__list__element--head'>
-              <span className='rank__list__element--head__rank'>Rang</span>
-              <span className='rank__list__element--head__username'>
-                Pseudo
-              </span>
-              <span className='rank__list__element--head__score'>Score</span>
-            </li>
-            <div className={'rank__list__element__wrapper'}>
-              {rank[0] &&
-                rank.map((player: any, index: any) => (
-                  <li key={index} className='rank__list__element'>
-                    <span
-                      className={
-                        player.username === context.username
-                          ? 'rank__list__element__rank rank__list__element__actualPlayer'
-                          : 'rank__list__element__rank'
-                      }
-                    >
-                      #{player.rank}
-                    </span>
-                    <span
-                      className={
-                        player.username === context.username
-                          ? 'rank__list__element__username rank__list__element__actualPlayer'
-                          : 'rank__list__element__username'
-                      }
-                    >
-                      {player.username}
-                    </span>
-                    <span
-                      className={
-                        player.username === context.username
-                          ? 'rank__list__element__score rank__list__element__actualPlayer'
-                          : 'rank__list__element__score'
-                      }
-                    >
-                      {player.score}
-                    </span>
-                  </li>
-                ))}
-            </div>
-          </ul>
-          <Link className='rank__button' to='/'>
+          <h1 className='home__title'>World Flags</h1>
+          <div className='rank__wrapper'>
+            <h2 className='rank__wrapper__title'>Classement</h2>
+            <ul className='rank__wrapper__list'>
+              <li className='rank__wrapper__list__element--head'>
+                <span className='rank__wrapper__list__element--head__rank'>
+                  Rang
+                </span>
+                <span className='rank__wrapper__list__element--head__username'>
+                  Pseudo
+                </span>
+                <span className='rank__wrapper__list__element--head__score'>
+                  Score
+                </span>
+              </li>
+              <div className={'rank__wrapper__list__element__wrapper'}>
+                {rank[0] &&
+                  rank.map((player: any, index: any) => (
+                    <li key={index} className='rank__wrapper__list__element'>
+                      <span
+                        className={
+                          player.username === context.username
+                            ? 'rank__wrapper__list__element__rank rank__wrapper__list__element__actualPlayer'
+                            : 'rank__wrapper__list__element__rank'
+                        }
+                      >
+                        #{player.rank}
+                      </span>
+                      <span
+                        className={
+                          player.username === context.username
+                            ? 'rank__wrapper__list__element__username rank__wrapper__list__element__actualPlayer'
+                            : 'rank__wrapper__list__element__username'
+                        }
+                      >
+                        {player.username}
+                      </span>
+                      <span
+                        className={
+                          player.username === context.username
+                            ? 'rank__wrapper__list__element__score rank__wrapper__list__element__actualPlayer'
+                            : 'rank__wrapper__list__element__score'
+                        }
+                      >
+                        {player.score}
+                      </span>
+                    </li>
+                  ))}
+              </div>
+            </ul>
+          </div>
+          <Link className='rank__button button' to='/'>
             Retourner au menu principal
           </Link>
         </>
