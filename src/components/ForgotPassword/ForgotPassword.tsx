@@ -38,15 +38,20 @@ const ForgotPassword = () => {
 
   return (
     <div className='forgotPassword'>
-      <div className='forgotPassword__background'></div>
       <form className='forgotPassword__form' onSubmit={handleSubmit}>
+        <Link className='login__form__close' to='/'>
+          <div className='login__form__close__line1'></div>
+          <div className='login__form__close__line2'></div>
+        </Link>
         <h2 className='forgotPassword__form__title'>
           Récupération du mot de passe
         </h2>
         <p className='forgotPassword__form__description'>
-          Veuillez saisir votre adresse email. Si elle existe dans notre base de
-          données, un email vous sera envoyé pour réinitialiser votre mot de
-          passe.
+          Veuillez saisir votre adresse email.
+        </p>
+        <p className='forgotPassword__form__description'>
+          Si elle existe dans notre base de données, un email vous sera envoyé
+          pour réinitialiser votre mot de passe.
         </p>
         <div className='forgotPassword__form__element'>
           <label
@@ -76,14 +81,11 @@ const ForgotPassword = () => {
           <span className='forgotPassword__form__error'>{errorMsg}</span>
         )}
         {!successMsg && (
-          <button className='forgotPassword__form__submit' type='submit'>
+          <button className='forgotPassword__form__submit button' type='submit'>
             Envoyer
           </button>
         )}
       </form>
-      <Link className='forgotPassword__home' to='/'>
-        Retour au menu principal
-      </Link>
     </div>
   );
 };

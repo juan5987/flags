@@ -45,8 +45,11 @@ const ResetPassword = () => {
 
   return (
     <div className='resetPassword'>
-      <div className='resetPassword__background'></div>
       <form className='resetPassword__form' onSubmit={handleSubmit}>
+        <Link className='login__form__close' to='/'>
+          <div className='login__form__close__line1'></div>
+          <div className='login__form__close__line2'></div>
+        </Link>
         <h2 className='resetPassword__form__title'>
           Modification du mot de passe
         </h2>
@@ -90,14 +93,11 @@ const ResetPassword = () => {
           <span className='resetPassword__form__error'>{errorMsg}</span>
         )}
         {!successMsg && (
-          <button className='resetPassword__form__submit' type='submit'>
+          <button className='resetPassword__form__submit button' type='submit'>
             Envoyer
           </button>
         )}
       </form>
-      <Link to='/' className='resetPassword__home'>
-        Retour au menu principal
-      </Link>
     </div>
   );
 };
