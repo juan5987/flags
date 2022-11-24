@@ -24,6 +24,7 @@ const Quiz = () => {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
   const [previousSolution, setPreviousSolution]: any = useState([]);
   const context: any = useContext(UserContext);
+  const quizRef: any = useRef();
 
   useEffect(() => {
     if (!isLoading) {
@@ -94,6 +95,7 @@ const Quiz = () => {
   }, []);
 
   const handlePass = () => {
+    window.scrollTo(0, 0);
     setResult(false);
     if (score > 0) {
       setScore((score) => score - 1);
@@ -106,6 +108,7 @@ const Quiz = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     if (answer && !gameOver) {
       if (normalizeString(answer) === normalizeString(solution)) {
         setResult(true);
@@ -125,6 +128,8 @@ const Quiz = () => {
   };
 
   const handleNextFlag = () => {
+    window.scrollTo(0, 0);
+
     setTimeout(() => {
       setShowResult(false);
     }, 750);
@@ -158,7 +163,7 @@ const Quiz = () => {
   };
 
   return (
-    <div className='quiz'>
+    <div className='quiz' ref={quizRef}>
       {isLoginModalOpened && <Login displayFunction={setIsLoginModalOpened} />}
       {notLoggedModalOpened && (
         <div className='quiz__modal'>
@@ -281,17 +286,27 @@ const Quiz = () => {
                   partie terminée
                 </h2>
                 <span className='quiz__gameover__content__score'>
-                  Votre score est: {score}
+                  Votre score: {score}
                 </span>
+                {score < context.bestScore ? (
+                  <span className='quiz__gameover__content__best'>
+                    Votre record: {context.bestScore}
+                  </span>
+                ) : (
+                  <span className='quiz__gameover__content__best'>
+                    {context.isLogged &&
+                      'Félicitations, vous avez battu votre record !'}
+                  </span>
+                )}
                 <div className='quiz__gameover__content__buttons'>
                   <button
-                    className='quiz__gameover__content__buttons__play'
+                    className='quiz__gameover__content__buttons__play button'
                     onClick={handlePlayAgain}
                   >
                     Rejouer
                   </button>
                   <Link
-                    className='quiz__gameover__content__buttons__quit'
+                    className='quiz__gameover__content__buttons__quit button'
                     to='/'
                   >
                     Quitter

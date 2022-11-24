@@ -36,7 +36,7 @@ const Home = () => {
           </span>
           {context.bestScore ? (
             <span className='home__score__content'>
-              Votre meilleur score est : {context.bestScore}
+              Votre record: {context.bestScore}
             </span>
           ) : (
             <span className='home__score__content'>

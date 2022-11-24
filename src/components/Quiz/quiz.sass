@@ -4,9 +4,6 @@
 .quiz 
     width: 100vw
     min-height: 100vh
-    background-image: url('../../static/images/map.jpg')
-    background-size: cover
-    background-position: center
     display: flex
     flex-direction: column
     justify-content: center
@@ -158,50 +155,74 @@
 
 
     &__gameover
-        position: absolute
+        position: fixed
         width: 100vw
-        height: 100vh
+        min-height: 100vh
+        top: 0
         display: flex
         flex-direction: column
         justify-content: center
         align-items: center
-        z-index: 1
-        background-color: rgba(0,0,0,.7)
+        background-color: rgba(0,0,0,.9)
+        z-index: 2
 
         &__content
             display: flex
             flex-direction: column
-            align-items: center
-            background-color: white
+            z-index: 1
             padding: 2rem
-            box-shadow: 5px 5px 5px -3px #999999
+            border-radius: 15px
+            position: relative
+            background-color: #4e54c8
 
             &__title
-                color: $primaryColor
-                font-size: 4rem
-                text-transform: uppercase
+                color: white
+                font-size: 2rem
+                z-index: 1
+                background-color: #ff9f1c
+                padding: 0.5em 1em
+                border: 10px solid white
+                border-radius: 6rem
+                display: block
+                font-family: 'Bowlby One SC', cursive
+                text-shadow: 1px 1px 5px #000000
                 margin-bottom: 2rem
+                text-align: center
+                font-weight: normal
 
             &__score
-                font-size: 3rem
+                font-size: 2rem
                 font-weight: bold
                 margin-bottom: 2rem
+                color: white
+                text-align: center
+                border: 5px solid white
+                background-color: rgba(0,0,0,.3)
+                border-radius: 1em
+                padding: .5rem
+
+            &__best
+                color: #ff9f1c
+                font-weight: bold
+                display: block
+                margin: 0 auto
+                margin-bottom: 2rem
+                font-size: 2rem
 
             &__buttons
                 display: flex
+                justify-content: center
 
-                &__play, &__quit
-                    background-color: $primaryColor
-                    color: white
-                    font-size: 1.8rem
-                    padding: .5rem 2rem
-                    border: 5px solid white
-                    display: flex
-                    align-items: center
+                &__play
+                    font-size: 1.5rem
+                    width: 200px
+                    margin-right: 1rem
+                    
+                &__quit
+                    font-size: 1.5rem
+                    width: 200px
+                    margin-left: 1rem
 
-                    &:hover
-                        cursor: pointer
-                        background-color: #5bccb5
 
     &__mobile
         display: none
@@ -215,6 +236,17 @@
 @media all and (max-width: 1200px)
     .quiz
         justify-content: flex-start
+
+        &__modal
+
+            &__content
+
+                &__buttons
+
+                    &__button
+                        width: min-content
+                        margin: 0
+                        font-size: 1.3rem
 
         &__top
             width: 100%
@@ -240,8 +272,6 @@
                 font-size: 2rem
                 font-weight: bold
                 padding: .5rem
-                border-radius: 15px
-                color: black
 
         &__mobile
             display: flex
@@ -308,7 +338,7 @@
 
                     &__play, &__quit
                         font-size: 1.5rem
-                        border: none
+                        width: min-content
 
                     &__play
                         margin-right: 1rem
