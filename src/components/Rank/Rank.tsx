@@ -13,7 +13,6 @@ const Rank = () => {
     setIsLoading(true);
     axios(`${context.apiUrl}/rank`)
       .then((result) => {
-        console.log(result.data);
         setRank(result.data);
       })
       .then(() => {
@@ -44,13 +43,31 @@ const Rank = () => {
               {rank[0] &&
                 rank.map((player: any, index: any) => (
                   <li key={index} className='rank__list__element'>
-                    <span className='rank__list__element__rank'>
+                    <span
+                      className={
+                        player.username === context.username
+                          ? 'rank__list__element__rank rank__list__element__actualPlayer'
+                          : 'rank__list__element__rank'
+                      }
+                    >
                       #{player.rank}
                     </span>
-                    <span className='rank__list__element__username'>
+                    <span
+                      className={
+                        player.username === context.username
+                          ? 'rank__list__element__username rank__list__element__actualPlayer'
+                          : 'rank__list__element__username'
+                      }
+                    >
                       {player.username}
                     </span>
-                    <span className='rank__list__element__score'>
+                    <span
+                      className={
+                        player.username === context.username
+                          ? 'rank__list__element__score rank__list__element__actualPlayer'
+                          : 'rank__list__element__score'
+                      }
+                    >
                       {player.score}
                     </span>
                   </li>

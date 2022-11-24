@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../App/App';
 import axios from 'axios';
 import './login.sass';
@@ -77,6 +78,9 @@ const Login = ({ displayFunction }: any) => {
             autoComplete='current-password'
           />
         </div>
+        <Link className='login__form__forgotPassword' to='/forgot-password'>
+          Mot de passe oublié ?
+        </Link>
         {formError && <span className='login__form__error'>{formError}</span>}
         <button className='login__form__submit'>Valider</button>
       </form>

@@ -5,6 +5,8 @@ import Quiz from '../Quiz/Quiz';
 import Rules from '../Rules/Rules';
 import Signup from '../Signup/Signup';
 import Rank from '../Rank/Rank';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import ResetPassword from '../ResetPassword/ResetPassword';
 import './app.sass';
 
 export const UserContext: any = createContext(null);
@@ -31,17 +33,20 @@ const App = () => {
   return (
     <div className='app'>
       <div className='app__wrapper'>
-        <Router basename='/'>
-          <UserContext.Provider value={contextValue}>
-            <Routes>
-              <Route path='/' element={<Home />}></Route>
-              <Route path='/quiz' element={<Quiz />}></Route>
-              <Route path='/rules' element={<Rules />}></Route>
-              <Route path='/signup' element={<Signup />}></Route>
-              <Route path='/rank' element={<Rank />}></Route>
-            </Routes>
-          </UserContext.Provider>
-        </Router>
+        <UserContext.Provider value={contextValue}>
+          <Routes>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/quiz' element={<Quiz />}></Route>
+            <Route path='/rules' element={<Rules />}></Route>
+            <Route path='/signup' element={<Signup />}></Route>
+            <Route path='/rank' element={<Rank />}></Route>
+            <Route path='/forgot-password' element={<ForgotPassword />}></Route>
+            <Route
+              path='/resetpassword/:token'
+              element={<ResetPassword />}
+            ></Route>
+          </Routes>
+        </UserContext.Provider>
       </div>
     </div>
   );

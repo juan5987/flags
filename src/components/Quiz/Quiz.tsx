@@ -69,18 +69,16 @@ const Quiz = () => {
 
   useEffect(() => {
     if (!notLoggedModalOpened && !isLoginModalOpened) {
-      axios('https://restcountries.com/v2/all')
+      axios(`${context.apiUrl}/flag/get`)
         .then((result) => {
-          let actualCountries = result.data.filter(
-            (country: any) => country.independent === true
-          );
+          let actualCountries = result.data;
           setAllCountries(actualCountries);
-          const randomInt = getRandomNumber(1, 202);
-          setCurrentFlag(actualCountries[randomInt].flag);
-          setSolution(actualCountries[randomInt].translations.fr);
+          const randomInt = getRandomNumber(0, 202);
+          setCurrentFlag(actualCountries[randomInt].image);
+          setSolution(actualCountries[randomInt].name);
           setPreviousSolution([
             ...previousSolution,
-            actualCountries[randomInt].translations.fr,
+            actualCountries[randomInt].name,
           ]);
         })
         .finally(() => {
@@ -133,24 +131,20 @@ const Quiz = () => {
     setTimeout(() => {
       setShowResult(false);
     }, 750);
-    let randomNumber = getRandomNumber(1, 202);
+    let randomNumber = getRandomNumber(0, 202);
     previousSolution.forEach((previousSolution: any) => {
-      while (previousSolution === allCountries[randomNumber].translations.fr) {
-        randomNumber = getRandomNumber(1, 202);
+      while (previousSolution === allCountries[randomNumber].name) {
+        randomNumber = getRandomNumber(0, 202);
       }
     });
-    setCurrentFlag(allCountries[randomNumber].flag);
-    setSolution(allCountries[randomNumber].translations.fr);
+    setCurrentFlag(allCountries[randomNumber].image);
+    setSolution(allCountries[randomNumber].name);
     setAnswer('');
-    setPreviousSolution([
-      ...previousSolution,
-      allCountries[randomNumber].translations.fr,
-    ]);
+    setPreviousSolution([...previousSolution, allCountries[randomNumber].name]);
     const newIntervalId: any = setInterval(() => {
       setTimer((timer) => timer - 0.01);
     }, 10);
     setIntervalId(newIntervalId);
-    console.log(previousSolution);
   };
 
   const handlePlayAgain = () => {

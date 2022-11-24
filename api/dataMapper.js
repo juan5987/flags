@@ -41,6 +41,23 @@ const dataMapper = {
       callback
     );
   },
+  addFlag: (name, image, region, callback) => {
+    client.query(
+      `INSERT INTO "flags" ("name", "image", "region") VALUES ($1, $2, $3)`,
+      [name, image, region],
+      callback
+    );
+  },
+  getFlags: (callback) => {
+    client.query(`SELECT * FROM "flags"`, callback);
+  },
+  updatePassword: (password, userId, callback) => {
+    client.query(
+      `UPDATE "user" SET "password" = $1 WHERE "id" = $2`,
+      [password, userId],
+      callback
+    );
+  },
 };
 
 module.exports = dataMapper;
