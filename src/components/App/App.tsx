@@ -17,8 +17,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [userId, setUserId] = useState('');
   const [bestScore, setBestScore] = useState(0);
-  const apiUrl = 'http://api.worldflags.fr';
-  // const apiUrl = 'http://localhost:3001';
+  const apiUrl = 'https://www.api.worldflags.fr';
 
   const contextValue: any = {
     isLogged,
