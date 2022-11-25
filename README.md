@@ -2,7 +2,7 @@
 
 World Flags est un jeu qui vous propose de tester vos connaissances des drapeaux du monde.
 
-L'application a été déployée et est accessible à l'adresse suivante: [http://worldflags.fr/](http://worldflags.fr/)
+L'application a été déployée et est accessible à l'adresse suivante: [https://www.worldflags.fr/](https://www.worldflags.fr/)
 
 ## Règles
 
