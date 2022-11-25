@@ -97,3 +97,64 @@
         width: min-content
         white-space: nowrap
         font-size: 1.5rem
+
+@media all and (max-width: 768px)
+    .rank
+        width: 100%
+        padding: .25rem
+
+        &__title
+            font-size: 2rem
+
+        &__wrapper
+            width: 100%
+            padding: 0
+            background-color: transparent
+
+            &__title
+                margin: 0 1rem
+                font-size: 1.5rem
+                margin-bottom: 1rem
+
+            &__list
+                display: flex
+                width: 100%
+                padding: 0
+
+                &__element
+                    width: 100%
+                    display: flex
+                    justify-content: space-between
+                    margin-bottom: .5rem
+
+                    &--head
+                        display: flex
+                        justify-content: space-between
+                        width: 100%
+
+                        &__rank, &__username, &__score, &__date
+                            width: 80px
+                            margin-right: 0
+                            margin-bottom: .5rem
+                            border-right: 1px solid white
+                            font-size: 1rem
+
+                        &__username
+                            flex-grow: 1
+
+
+                    &__rank, &__username, &__score
+                        width: 80px
+                        margin-right: 0
+                        border-right: 1px solid #4e54c8
+
+                    &__username
+                        flex-grow: 1
+
+                    &__wrapper
+                        display: flex
+                        flex-direction: column
+                        width: 100%
+
+    .rank__button
+        font-size: 1rem

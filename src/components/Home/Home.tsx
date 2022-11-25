@@ -25,8 +25,8 @@ const Home = () => {
       {isLoginModalOpened && <Login displayFunction={setIsLoginModalOpened} />}
       <h1 className='home__title'>World Flags</h1>
       <h2 className='home__subtitle'>
-        Testez votre connaissance des drapeaux du monde avec notre quiz et
-        atteignez le sommet du classement
+        Testez votre connaissance des drapeaux et atteignez le sommet du
+        classement
       </h2>
 
       {context.isLogged && (

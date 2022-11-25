@@ -29,7 +29,7 @@ const Rank = () => {
         <h2 className='rank__loading'> Récupération des scores... </h2>
       ) : (
         <>
-          <h1 className='home__title'>World Flags</h1>
+          <h1 className='home__title rank__title'>World Flags</h1>
           <div className='rank__wrapper'>
             <h2 className='rank__wrapper__title'>Classement</h2>
             <ul className='rank__wrapper__list'>

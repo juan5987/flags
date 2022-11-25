@@ -1,13 +1,12 @@
-import Footer from '../Footer/Footer';
 import './rules.sass';
 import { Link } from 'react-router-dom';
 
 const Rules = () => {
   return (
     <div className='rules'>
-      <h1 className='home__title'>World Flags</h1>
-      <div className='rank__wrapper'>
-        <h2 className='rank__wrapper__title'>Les règles</h2>
+      <h1 className='home__title rules__title'>World Flags</h1>
+      <div className='rules__wrapper'>
+        <h2 className='rules__wrapper__title'>Les règles</h2>
 
         <ol className='rules__list'>
           <li className='rules__list__element'>
@@ -74,13 +73,11 @@ const Rules = () => {
           </li>
           <li className='rules__list__element'>
             <Link className='rules__list__element__button button' to='/'>
-              Retourner au menu principal
+              Menu principal
             </Link>
           </li>
         </ol>
       </div>
-
-      <Footer />
     </div>
   );
 };
