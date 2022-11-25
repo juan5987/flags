@@ -1,121 +1,86 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap')
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Carter+One&family=Chango&family=Monoton&family=Vast+Shadow&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap')
 
 .home 
     width: 100vw
     min-height: 100vh
-    background-image: url('../../static/images/map.jpg')
-    background-size: cover
-    background-position: center
     display: flex
     flex-direction: column
-    justify-content: space-around
+    justify-content: space-between
     align-items: center
+    z-index: 1
+    padding: 2rem
 
-    &__background
-        position: fixed
-        left: 0
-        right: 0
-        top: 0
-        bottom: 0
-        background-color: rgba(57, 88, 57, 0.7)
-        z-index: 0
-        padding: 2rem
-        height: 100%
+    &__title
+        color: white
+        font-size: 4rem
+        z-index: 1
+        background-color: #ff9f1c
+        padding: 0.5em 1em
+        border: 10px solid white
+        border-radius: 6rem
+        display: block
+        font-family: 'Bowlby One SC', cursive
+        text-shadow: 1px 1px 5px #000000
+        margin-bottom: 2rem
+        text-align: center
 
 
-    &__header 
+    &__subtitle 
+        color: white
         margin-bottom: 2rem
         z-index: 1
-        background-color: rgb(240, 240, 240)
-        border-radius: 4rem
-        padding: 0.75rem 2rem
-        border: 15px solid #272927
-
-
-        &__title
-            font-family: 'Pacifico', 'Roboto', sans-serif
-            text-align: center
-            font-size: 4rem
-            color: #f86300
-            margin-bottom: 1rem
-
-
-        &__subtitle 
-            font-family: 'Roboto', sans-serif
-            text-align: center
-            font-size: 1.8rem
-            color: #3d413d
-            z-index: 1
-            margin-bottom: 2rem
 
     &__score
         display: flex
         flex-direction: column
         margin-bottom: 2rem
+        background-color: rgba(0,0,0,.3)
+        z-index: 1
+        padding: 1em 2em
+        border-radius: 15px
 
         &__welcome
             font-size: 2rem
             font-weight: bold
-            color: white
             z-index: 1
             text-align: center
             margin-bottom: 1rem
+            color: white
 
         &__content
             font-size: 1.5rem
             font-weight: bold
-            color: white
             z-index: 1
             text-align: center
+            color: #ff9f1c
 
     &__menu 
         display: flex
         flex-direction: column
         align-items: center
+        justify-content: center
         z-index: 1
-
-
-        &__button 
-            width: 250px
-            text-align: center
-            color: rgb(240, 240, 240)
-            background-color: #272927
-            margin-bottom: 2rem
-            padding: 1rem
-            font-size: 1.5rem
-            text-transform: uppercase
-            font-family: cursive
-            border: 5px solid rgb(240, 240, 240)
-            border-radius: 15px
-            transition: background-color 0.25s
-            font-family: 'Roboto', cursive
-            font-weight: bold
-
-            &:hover 
-                cursor: pointer
-                background-color: rgb(18, 90, 46)
-
-            &--signup
-                border: 5px solid orange
-                color: orange
 
 @media all and (max-width: 1200px)
     .home
-        padding: 1rem
-        background-image: url('../../static/images/map_mobile.jpg')
+
+        &__title
+            font-size: 3rem
+
+        &__subtitle
+            display: none
 
         &__background
+            padding: 0
 
         &__header
-            border: 10px solid black
-            border-radius: 15px
-            padding: .5rem 1rem
 
             &__title
-                font-size: 2.7rem
+                background-color: rgba(0,0,0,.7)
+                font-size: 2.5rem
 
             &__subtitle
-                font-size: 1.5rem
-                margin-bottom: .5rem
-
+                display: none

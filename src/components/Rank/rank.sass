@@ -1,117 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap')
+
 .rank 
     width: 100vw
     min-height: 100vh
-    background-image: url('../../static/images/map.jpg')
-    background-size: cover
-    background-position: center
     display: flex
     flex-direction: column
     justify-content: space-around
     align-items: center
 
-    &__background
-        position: fixed
-        left: 0
-        right: 0
-        top: 0
-        bottom: 0
-        background-color: rgba(57, 88, 57, 0.7)
-        z-index: 0
-        padding: 2rem
-        height: 100%
-
     &__loading
         color: white
         z-index: 2
 
-    &__title
-        background-color: rgb(240, 240, 240)
-        border: 20px solid #272927
-        border-radius: 4rem
-        text-align: center
-        font-family: 'Pacifico', 'Roboto', sans-serif
-        font-size: 4rem
-        color: #f86300
-        padding: 0.75rem 3rem
-        margin-bottom: 2rem
-        max-width: 1200px
-        white-space: nowrap
+    &__wrapper
         z-index: 1
-
-    &__list
-        display: flex
-        flex-direction: column
-        align-items: flex-start
-        z-index: 1
-        background-color: rgba(0,0,0,.7)
+        background-color: rgba(0,0,0,.3)
+        border-radius: 2rem
         padding: 2rem
 
-        &__element
+        &__title
+            color: white
+            text-align: center
+            text-transform: uppercase
+            font-family: 'Bowlby One SC', cursive
+            font-weight: normal
+            font-size: 2rem
+            margin-bottom: 1rem
+
+        &__list
             display: flex
-            align-items: center
+            flex-direction: column
+            align-items: flex-start
+            z-index: 1
 
-            &__wrapper
-                height: 450px
-                overflow-y:  scroll
-
-            &--head
+            &__element
                 display: flex
                 align-items: center
-                font-weight: bold
-                text-transform: uppercase
+                margin-bottom: 1rem
 
-                &__rank, &__username, &__score, &__date
+                &:last-child
+                    margin-bottom: 0
+
+                &__wrapper
+                    max-height: 450px
+                    overflow-y:  scroll
+
+                &--head
+                    display: flex
+                    align-items: center
+                    font-weight: bold
+                    text-transform: uppercase
+
+                    &__rank, &__username, &__score, &__date
+                        padding: 1rem
+                        background-color: rgba(0,0,0,.3)
+                        margin-right: 2px
+                        font-size: 1.2rem
+                        width: 150px
+                        text-align: center
+                        margin-right: 20px
+                        margin-bottom: 20px
+                        width: 250px
+
+                    &__rank
+                        color: white
+                        width: 100px
+                    &__score
+                        width: 100px
+
+                    &__username, &__score
+                        color: white
+
+                &__rank, &__username, &__score
                     padding: 1rem
                     background-color: white
-                    margin-right: 2px
-                    font-size: 1.2rem
-                    width: 150px
-                    text-align: center
                     margin-right: 20px
-                    margin-bottom: 20px
+                    font-size: 1.2rem
                     width: 250px
+                    text-align: center
+                    font-weight: bold
 
                 &__rank
-                    background-color: #f86300
-                    color: white
+                    color: #f86300
+                    width: 100px
+
+                &__score
+                    width: 100px
 
                 &__username, &__score, &__date
-                    background-color: #22927c
-                    color: white
+                    color: black
 
-            &__rank, &__username, &__score, &__date
-                padding: 1rem
-                background-color: white
-                margin-right: 20px
-                font-size: 1.2rem
-                width: 250px
-                text-align: center
-                margin-bottom: 20px
-                font-weight: bold
-
-            &__rank
-                color: #f86300
-
-            &__username, &__score, &__date
-                color: black
+                &__actualPlayer
+                    background-color: #e6d00e
 
     &__button
-        text-align: center
-        color: rgb(240, 240, 240)
-        background-color: #272927
-        margin: 0 auto
-        margin-bottom: 1rem
-        padding: 1rem 2rem
-        font-size: 1rem
-        text-transform: uppercase
-        border: 5px solid rgb(240, 240, 240)
-        border-radius: 15px
-        transition: background-color 0.25s
-        font-family: 'Roboto', cursive
-        font-weight: bold
-        z-index: 1
+        width: min-content
         white-space: nowrap
+        font-size: 1.5rem
 
-        &:hover
-            cursor: pointer
-            background-color: #22927c
+@media all and (max-width: 768px)
+    .rank
+        width: 100%
+        padding: .25rem
+
+        &__title
+            font-size: 2rem
+
+        &__wrapper
+            width: 100%
+            padding: 0
+            background-color: transparent
+
+            &__title
+                margin: 0 1rem
+                font-size: 1.5rem
+                margin-bottom: 1rem
+
+            &__list
+                display: flex
+                width: 100%
+                padding: 0
+
+                &__element
+                    width: 100%
+                    display: flex
+                    justify-content: space-between
+                    margin-bottom: .5rem
+
+                    &--head
+                        display: flex
+                        justify-content: space-between
+                        width: 100%
+
+                        &__rank, &__username, &__score, &__date
+                            width: 80px
+                            margin-right: 0
+                            margin-bottom: .5rem
+                            border-right: 1px solid white
+                            font-size: 1rem
+
+                        &__username
+                            flex-grow: 1
+
+
+                    &__rank, &__username, &__score
+                        width: 80px
+                        margin-right: 0
+                        border-right: 1px solid #4e54c8
+
+                    &__username
+                        flex-grow: 1
+
+                    &__wrapper
+                        display: flex
+                        flex-direction: column
+                        width: 100%
+
+    .rank__button
+        font-size: 1rem

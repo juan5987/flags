@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Login from '../Login/Login';
 import { UserContext } from '../App/App';
 import './home.sass';
+import '../../static/css/global.sass';
 
 const Home = () => {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
@@ -21,15 +22,13 @@ const Home = () => {
 
   return (
     <div className='home'>
-      <div className='home__background' />
       {isLoginModalOpened && <Login displayFunction={setIsLoginModalOpened} />}
+      <h1 className='home__title'>World Flags</h1>
+      <h2 className='home__subtitle'>
+        Testez votre connaissance des drapeaux et atteignez le sommet du
+        classement
+      </h2>
 
-      <header className='home__header'>
-        <h1 className='home__header__title'>World Flags</h1>
-        <h3 className='home__header__subtitle'>
-          Devinez les drapeaux et entrez dans le top du classement
-        </h3>
-      </header>
       {context.isLogged && (
         <div className='home__score'>
           <span className='home__score__welcome'>
@@ -37,7 +36,7 @@ const Home = () => {
           </span>
           {context.bestScore ? (
             <span className='home__score__content'>
-              Votre meilleur score est : {context.bestScore}
+              Votre record: {context.bestScore}
             </span>
           ) : (
             <span className='home__score__content'>
@@ -48,22 +47,22 @@ const Home = () => {
       )}
 
       <div className='home__menu'>
-        <Link to='/quiz' className='home__menu__button'>
+        <Link to='/quiz' className='button'>
           Jouer
         </Link>
-        <Link to='/rules' className='home__menu__button'>
+        <Link to='/rules' className='button'>
           Règles
         </Link>
-        <Link to='/rank' className='home__menu__button'>
+        <Link to='/rank' className='button'>
           Classement
         </Link>
         {context.isLogged ? (
-          <button className='home__menu__button' onClick={handleLogout}>
+          <button className='button' onClick={handleLogout}>
             Déconnexion
           </button>
         ) : (
           <button
-            className='home__menu__button'
+            className='button'
             onClick={() => setIsLoginModalOpened(true)}
           >
             Connexion
@@ -72,7 +71,8 @@ const Home = () => {
         {!context.isLogged && (
           <Link
             to='/signup'
-            className='home__menu__button home__menu__button--signup'
+            className='button'
+            style={{ color: '#ff9f1c', border: '5px solid #ff9f1c' }}
           >
             Inscription
           </Link>

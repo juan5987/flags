@@ -123,13 +123,15 @@ const Signup = () => {
 
   return (
     <div className='signup'>
-      <Link className='signup__form__close' to='/'>
-        <div className='signup__form__close__line1'></div>
-        <div className='signup__form__close__line2'></div>
-      </Link>
-      <div className='signup__background'></div>
+      <h1 className='home__title'>World Flags</h1>
+
       <form className='signup__form' onSubmit={handleSubmit}>
-        <h2 className='signup__title'>Inscription</h2>
+        <Link className='signup__form__close' to='/'>
+          <div className='signup__form__close__line1'></div>
+          <div className='signup__form__close__line2'></div>
+        </Link>
+        <h2 className='signup__form__title'>Inscription</h2>
+
         <div className='signup__form__element'>
           <label className='signup__form__element__label' htmlFor='username'>
             Nom d'utilisateur
@@ -257,7 +259,7 @@ const Signup = () => {
         {error.global && (
           <span className='signup__form__element__error'>{error.global}</span>
         )}
-        <button className='signup__form__submit' type='submit'>
+        <button className='signup__form__submit button' type='submit'>
           Valider
         </button>
         {sucessMsg && (
@@ -267,7 +269,7 @@ const Signup = () => {
         )}
       </form>
       <Link to='/' className='signup__home'>
-        Retour au menu principal
+        Menu principal
       </Link>
     </div>
   );

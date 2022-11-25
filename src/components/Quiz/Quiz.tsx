@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import { getRandomNumber } from '../../utils/randomInt';
 import { normalizeString } from '../../utils/normalizeString';
 import { UserContext } from '../App/App';
-import Footer from '../Footer/Footer';
-import check from '../../static/images/check.svg';
 import Login from '../Login/Login';
-import chevron_right from '../../static/images/chevron-right.svg';
 import './quiz.sass';
 
 const Quiz = () => {
@@ -27,6 +24,7 @@ const Quiz = () => {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
   const [previousSolution, setPreviousSolution]: any = useState([]);
   const context: any = useContext(UserContext);
+  const quizRef: any = useRef();
 
   useEffect(() => {
     if (!isLoading) {
@@ -34,6 +32,7 @@ const Quiz = () => {
         setTimer((timer) => timer - 0.01);
       }, 10);
       setIntervalId(newIntervalId);
+      inputRef.current.focus();
       return () => clearInterval(newIntervalId);
     }
   }, [isLoading]);
@@ -68,18 +67,16 @@ const Quiz = () => {
 
   useEffect(() => {
     if (!notLoggedModalOpened && !isLoginModalOpened) {
-      axios('https://restcountries.com/v2/all')
+      axios(`${context.apiUrl}/flag/get`)
         .then((result) => {
-          let actualCountries = result.data.filter(
-            (country: any) => country.independent === true
-          );
+          let actualCountries = result.data;
           setAllCountries(actualCountries);
-          const randomInt = getRandomNumber(1, 202);
-          setCurrentFlag(actualCountries[randomInt].flag);
-          setSolution(actualCountries[randomInt].translations.fr);
+          const randomInt = getRandomNumber(0, 202);
+          setCurrentFlag(actualCountries[randomInt].image);
+          setSolution(actualCountries[randomInt].name);
           setPreviousSolution([
             ...previousSolution,
-            actualCountries[randomInt].translations.fr,
+            actualCountries[randomInt].name,
           ]);
         })
         .finally(() => {
@@ -98,17 +95,21 @@ const Quiz = () => {
   }, []);
 
   const handlePass = () => {
+    window.scrollTo(0, 0);
     setResult(false);
     if (score > 0) {
       setScore((score) => score - 1);
     }
     setShowResult(true);
     clearInterval(intervalId);
+    handleNextFlag();
+    inputRef.current.focus();
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (answer) {
+    window.scrollTo(0, 0);
+    if (answer && !gameOver) {
       if (normalizeString(answer) === normalizeString(solution)) {
         setResult(true);
         setScore((score) => score + 3);
@@ -120,42 +121,40 @@ const Quiz = () => {
         clearInterval(intervalId);
         setResult(false);
       }
+      handleNextFlag();
       setShowResult(true);
     }
-    e.target.blur();
+    inputRef.current.focus();
   };
 
   const handleNextFlag = () => {
-    setShowResult(false);
-    let randomNumber = getRandomNumber(1, 202);
+    window.scrollTo(0, 0);
+
+    setTimeout(() => {
+      setShowResult(false);
+    }, 750);
+    let randomNumber = getRandomNumber(0, 202);
     previousSolution.forEach((previousSolution: any) => {
-      while (previousSolution === allCountries[randomNumber].translations.fr) {
-        randomNumber = getRandomNumber(1, 202);
+      while (previousSolution === allCountries[randomNumber].name) {
+        randomNumber = getRandomNumber(0, 202);
       }
     });
-    setCurrentFlag(allCountries[randomNumber].flag);
-    setSolution(allCountries[randomNumber].translations.fr);
+    setCurrentFlag(allCountries[randomNumber].image);
+    setSolution(allCountries[randomNumber].name);
     setAnswer('');
-    setPreviousSolution([
-      ...previousSolution,
-      allCountries[randomNumber].translations.fr,
-    ]);
+    setPreviousSolution([...previousSolution, allCountries[randomNumber].name]);
     const newIntervalId: any = setInterval(() => {
       setTimer((timer) => timer - 0.01);
     }, 10);
     setIntervalId(newIntervalId);
-    console.log(previousSolution);
   };
 
   const handlePlayAgain = () => {
-    setTimer(60);
     setGameOver(false);
     setScore(0);
+    setTimer(60);
     handleNextFlag();
-    const newIntervalId: any = setInterval(() => {
-      setTimer((timer) => timer - 0.01);
-    }, 1000);
-    setIntervalId(newIntervalId);
+    inputRef.current.focus();
   };
 
   const handleLogin = () => {
@@ -164,8 +163,7 @@ const Quiz = () => {
   };
 
   return (
-    <div className='quiz'>
-      <div className='quiz__background'></div>
+    <div className='quiz' ref={quizRef}>
       {isLoginModalOpened && <Login displayFunction={setIsLoginModalOpened} />}
       {notLoggedModalOpened && (
         <div className='quiz__modal'>
@@ -180,13 +178,13 @@ const Quiz = () => {
             </p>
             <div className='quiz__modal__content__buttons'>
               <button
-                className='quiz__modal__content__buttons__button'
+                className='quiz__modal__content__buttons__button button'
                 onClick={handleLogin}
               >
                 Connexion
               </button>
               <button
-                className='quiz__modal__content__buttons__button'
+                className='quiz__modal__content__buttons__button button'
                 onClick={() => setNotLoggedModalOpened(false)}
               >
                 Continuer
@@ -196,7 +194,9 @@ const Quiz = () => {
         </div>
       )}
       {isLoading ? (
-        <h2 className='quiz__top__loading'>Chargement de la partie...</h2>
+        <h2 className='quiz__top__loading'>
+          {!notLoggedModalOpened && 'Chargement de la partie...'}
+        </h2>
       ) : (
         <>
           <div className='quiz__mobile'>
@@ -204,8 +204,11 @@ const Quiz = () => {
               <h2 className='quiz__mobile__score__label'>Score</h2>
               <span className='quiz__mobile__score__value'>{score}</span>
             </div>
+            <Link className='quiz__mobile__quit button' to='/'>
+              Quitter
+            </Link>
             <div className='quiz__mobile__timer'>
-              <h2 className='quiz__mobile__timer__label'>Temps restant</h2>
+              <h2 className='quiz__mobile__timer__label'>Temps</h2>
               <span className='quiz__mobile__timer__value'>
                 {Math.round(timer)}
               </span>
@@ -217,21 +220,37 @@ const Quiz = () => {
               <span className='quiz__top__score'>{score}</span>
             </div>
             <div>
-              <Link className='quiz__quit' to='/'>
+              <Link className='quiz__quit button' to='/'>
                 quitter
               </Link>
-
+            </div>
+            <div className='quiz__top__middle'>
               <img
-                className='quiz__top__flag'
+                className='quiz__top__middle__flag'
                 src={currentFlag}
                 alt='drapeau'
-                height={300}
               />
             </div>
+
             <div className='quiz__top__right'>
               <h2 className='quiz__top_title'>Temps restant</h2>
               <span className='quiz__top__score'>{Math.round(timer)}</span>
             </div>
+          </div>
+          <div className='quiz__result'>
+            {showResult && (
+              <>
+                {' '}
+                {result ? (
+                  <span className='quiz__result__good'>Bravo</span>
+                ) : (
+                  <span className='quiz__result__wrong'>
+                    Dommage: &nbsp;
+                    {previousSolution[previousSolution.length - 2]}
+                  </span>
+                )}
+              </>
+            )}
           </div>
 
           <form className='quiz__answer' onSubmit={handleSubmit}>
@@ -240,62 +259,26 @@ const Quiz = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setAnswer(e.target.value)
                 }
-                className='quiz__answer__letter'
+                className='quiz__answer__input'
                 type='text'
                 ref={inputRef}
-                placeholder='Réponse'
+                placeholder='Votre réponse'
                 value={answer}
               />
             }
             <div className='quiz__buttons'>
-              <button className='quiz__buttons__button' onClick={handlePass}>
+              <button
+                className='quiz__buttons__button button'
+                onClick={handlePass}
+                type='button'
+              >
                 Passer
               </button>
-              <button className='quiz__buttons__button'>Valider</button>
+              <button className='quiz__buttons__button button' type='submit'>
+                Valider
+              </button>
             </div>
           </form>
-          {showResult && (
-            <div className='quiz__result'>
-              <div className='quiz__result__content'>
-                {result && (
-                  <>
-                    <img
-                      className='quiz__result__content__check'
-                      src={check}
-                      alt='check logo'
-                    />
-                    <h3 className='quiz__result__content__correct'>
-                      Félicitations !
-                    </h3>
-                    <span className='quiz__result__content__text'>
-                      La réponse est:
-                    </span>
-                  </>
-                )}
-                {!result && (
-                  <>
-                    <div className='quiz__result__content__cross'>x</div>
-                    <h3 className='quiz__result__content__incorrect'>
-                      Dommage
-                    </h3>
-                    <span className='quiz__result__content__text'>
-                      La réponse était:
-                    </span>
-                  </>
-                )}
-                <span className='quiz__result__content__solution'>
-                  {solution}
-                </span>
-                <button
-                  className='quiz__result__content__next'
-                  onClick={handleNextFlag}
-                >
-                  Drapeau suivant
-                  <img src={chevron_right} alt='chevron' />
-                </button>
-              </div>
-            </div>
-          )}
           {gameOver && (
             <div className='quiz__gameover'>
               <div className='quiz__gameover__content'>
@@ -303,17 +286,27 @@ const Quiz = () => {
                   partie terminée
                 </h2>
                 <span className='quiz__gameover__content__score'>
-                  Votre score est: {score}
+                  Votre score: {score}
                 </span>
+                {score < context.bestScore ? (
+                  <span className='quiz__gameover__content__best'>
+                    Votre record: {context.bestScore}
+                  </span>
+                ) : (
+                  <span className='quiz__gameover__content__best'>
+                    {context.isLogged &&
+                      'Félicitations, vous avez battu votre record !'}
+                  </span>
+                )}
                 <div className='quiz__gameover__content__buttons'>
                   <button
-                    className='quiz__gameover__content__buttons__play'
+                    className='quiz__gameover__content__buttons__play button'
                     onClick={handlePlayAgain}
                   >
                     Rejouer
                   </button>
                   <Link
-                    className='quiz__gameover__content__buttons__quit'
+                    className='quiz__gameover__content__buttons__quit button'
                     to='/'
                   >
                     Quitter
@@ -322,8 +315,6 @@ const Quiz = () => {
               </div>
             </div>
           )}
-
-          <Footer />
         </>
       )}
     </div>
