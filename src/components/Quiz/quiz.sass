@@ -137,7 +137,7 @@
 
     &__result
         z-index: 1
-        margin-bottom: 2rem
+        margin: 2rem 0
         height: 2rem
 
         &__good, &__wrong
@@ -145,7 +145,7 @@
             background-color: white
             border-radius: 15px
             font-weight: bold
-            font-size: 1.5rem
+            font-size: 1rem
 
         &__good
             color: green
@@ -236,6 +236,7 @@
 @media all and (max-width: 1200px)
     .quiz
         justify-content: flex-start
+        padding: .25reem
 
         &__modal
 
@@ -246,7 +247,7 @@
                     &__button
                         width: min-content
                         margin: 0
-                        font-size: 1.3rem
+                        font-size: 1rem
 
         &__top
             width: 100%
@@ -269,9 +270,12 @@
         &__answer
             
             &__input
-                font-size: 2rem
+                font-size: 1.8rem
                 font-weight: bold
                 padding: .5rem
+                min-width: 100%
+                width: 100%
+                border-radius: 0
 
         &__mobile
             display: flex
@@ -301,8 +305,8 @@
 
             &__button
                 width: min-content
-                padding: 1rem 2rem
-                font-size: 1.5rem
+                padding: .5rem 1rem
+                font-size: 1rem
 
             &__pass, &__submit
                 font-size: 2rem
@@ -337,7 +341,7 @@
                 &__buttons
 
                     &__play, &__quit
-                        font-size: 1.5rem
+                        font-size: 1rem
                         width: min-content
 
                     &__play

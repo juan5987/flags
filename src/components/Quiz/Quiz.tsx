@@ -242,10 +242,10 @@ const Quiz = () => {
               <>
                 {' '}
                 {result ? (
-                  <span className='quiz__result__good'>Bonne réponse</span>
+                  <span className='quiz__result__good'>Bravo</span>
                 ) : (
                   <span className='quiz__result__wrong'>
-                    Mauvaise réponse:{' '}
+                    Dommage: &nbsp;
                     {previousSolution[previousSolution.length - 2]}
                   </span>
                 )}

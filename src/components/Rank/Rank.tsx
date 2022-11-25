@@ -81,7 +81,7 @@ const Rank = () => {
             </ul>
           </div>
           <Link className='rank__button button' to='/'>
-            Retourner au menu principal
+            Menu principal
           </Link>
         </>
       )}
