@@ -2,6 +2,8 @@
 
 World Flags est un jeu qui vous propose de tester vos connaissances des drapeaux du monde.
 
+L'application a été déployée et est accessible à l'adresse suivante: [http://worldflags.fr/](http://worldflags.fr/)
+
 ## Règles
 
 Un quiz dure 60 secondes, pendant ce temps, vous devez cumuler un maximum de points. Pour chaque bonne réponse, vous gagnez 3 points. Mais attention, si vous ne trouvez pas la réponse en passant ou en vous trompant, vous perdez 1 point en sachant que vous ne pouvez pas avoir un score négatif..
