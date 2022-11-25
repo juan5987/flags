@@ -15,12 +15,12 @@ const Rules = () => {
             </span>
             <span className='rules__list__element__content'>
               Un quiz dure <b>60 secondes</b>, pendant ce temps, vous devez
-              cumuler un maximum de points.{' '}
+              cumuler un maximum de points.
               <b>Pour chaque bonne réponse, vous gagnez 3 points</b>. Mais
-              attention,{' '}
+              attention,
               <b>
                 si vous ne trouvez pas la réponse en passant ou en vous
-                trompant, vous perdez 1 points en sachant que vous ne pouvez pas
+                trompant, vous perdez 1 point en sachant que vous ne pouvez pas
                 avoir un score négatif.
               </b>
               .

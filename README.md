@@ -1,46 +1,25 @@
-# Getting Started with Create React App
+# World Flags
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+World Flags est un jeu qui vous propose de tester vos connaissances des drapeaux du monde.
 
-## Available Scripts
+## Règles
 
-In the project directory, you can run:
+Un quiz dure 60 secondes, pendant ce temps, vous devez cumuler un maximum de points. Pour chaque bonne réponse, vous gagnez 3 points. Mais attention, si vous ne trouvez pas la réponse en passant ou en vous trompant, vous perdez 1 point en sachant que vous ne pouvez pas avoir un score négatif..
 
-### `npm start`
+A vous de faire le bon choix, passer, ou prendre le temps de réfléchir pour éviter de perdre top de point.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Classement
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+World Flags propose un classement des scores des utilisateurs.
 
-### `npm test`
+La première fois que vous jouez, puis à chaque fois que vous réalisez votre record personnel, ce dernier est actualisé dans notre base de données.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Vous pourrez vous situer dans le classement en cliquant sur le bouton classement du menu principal.
 
-### `npm run build`
+Apprenez en vous amusant et améliorer votre score pour atteindre le haut du classement.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Vous devez être authentifié pour pouvoir sauvegarder votre score. Si vous souhaitez apparaître dans le classement des meilleurs scores, pensez donc à vous enregistrer sur le site.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Stack technique
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+World Flags a été réalisé à l'aide de React.js et TypeScript et une API codée en Node.js / Express.js
