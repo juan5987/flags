@@ -71,13 +71,11 @@ const Rules = () => {
               le haut du classement.
             </span>
           </li>
-          <li className='rules__list__element'>
-            <Link className='rules__list__element__button button' to='/'>
-              Menu principal
-            </Link>
-          </li>
         </ol>
       </div>
+      <Link className='rules__list__element__button button' to='/'>
+        Menu principal
+      </Link>
     </div>
   );
 };

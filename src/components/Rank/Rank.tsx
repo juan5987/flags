@@ -20,6 +20,7 @@ const Rank = () => {
       })
       .catch((err) => {
         console.log(err);
+        setIsLoading(false);
       });
   }, []);
 
