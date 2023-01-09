@@ -1,5 +1,5 @@
-import { createContext, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createContext, useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Home from '../Home/Home';
 import Quiz from '../Quiz/Quiz';
 import Rules from '../Rules/Rules';
@@ -18,6 +18,10 @@ const App = () => {
   const [userId, setUserId] = useState('');
   const [bestScore, setBestScore] = useState(0);
   const apiUrl = 'https://www.api.worldflags.fr';
+
+  // if (window.location.href.slice(8, 11) !== 'www') {
+  //   window.location.href = 'https://www.worldflags.fr';
+  // }
 
   const contextValue: any = {
     isLogged,
